@@ -1658,18 +1658,235 @@
                     <!-- Image Column (Left) -->
                     <!-- Video Column (Left) -->
                     <div class="w-full lg:w-1/2">
-                        <div class="relative overflow-hidden rounded-lg shadow-xl bg-gray-900 aspect-video">
-                            <div class="relative h-0 pb-[56.25%]">
-                                <iframe   
-                                    src="https://player.cloudinary.com/embed/?cloud_name=dcqre7nop&public_id=cargo-port-drone&autoplay=true&loop=true&muted=true&controls=false&transformation[crop]=fill&transformation[gravity]=center"   
-                                    class="absolute top-0 left-0 w-full h-full"
-                                    style="border: none; object-fit: cover;"
-                                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                                    title="Cargo port drone video">
-                                </iframe>
+                        <div class="relative overflow-hidden rounded-lg shadow-xl bg-gray-900 aspect-video group">
+                            <!-- Video Player with Reduced Opacity -->
+                            <div class="absolute top-0 left-0 w-full h-full bg-black/40">
+                                <video 
+                                    id="heroVideo"
+                                    class="w-full h-full object-cover opacity-80"
+                                    playsinline 
+                                    loop 
+                                    muted 
+                                    autoplay
+                                    preload="auto"
+                                    poster="https://res.cloudinary.com/dcqre7nop/video/upload/c_limit,h_300,w_500/cargo-port-drone.jpg"
+                                    src="https://res.cloudinary.com/dcqre7nop/video/upload/c_fill,g_center/f_auto:video/cargo-port-drone">
+                                </video>
                             </div>
+                            
+                            <!-- Text Slideshow Container -->
+                            <div class="absolute inset-0 z-10 flex items-center justify-center p-4">
+                                <div id="textSlideshow" class="text-center text-white w-full max-w-4xl px-4">
+                                    <!-- Slides will be added by JavaScript -->
+                                </div>
+                            </div>
+                            
+                            <!-- Gradient Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
                         </div>
                     </div>
+                    
+                    <style>
+                        .slide {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            opacity: 0;
+                            transition: opacity 0.5s ease-in-out;
+                            width: 100%;
+                            height: 100%;
+                            padding: 1.5rem;
+                            box-sizing: border-box;
+                            text-align: center;
+                        }
+                        .slide.active {
+                            opacity: 1;
+                        }
+                        .slide h3 {
+                            font-size: 1.8rem;
+                            font-weight: 700;
+                            margin-bottom: 1rem;
+                            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+                            letter-spacing: 0.5px;
+                            color: #fff;
+                        }
+                        .slide p {
+                            font-size: 1.3rem;
+                            line-height: 1.6;
+                            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+                            color: rgba(255,255,255,0.95);
+                            max-width: 80%;
+                            margin: 0 auto;
+                        }
+                        /* Smooth transitions */
+                        .slide {
+                            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+                            transform: translateY(20px);
+                        }
+                        .slide.active {
+                            transform: translateY(0);
+                        }
+                        @media (min-width: 768px) {
+                            .slide h3 {
+                                font-size: 2rem;
+                            }
+                            .slide p {
+                                font-size: 1.25rem;
+                            }
+                        }
+                    </style>
+                    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const slides = [
+                                {
+                                    title: "Your Global Freight & Logistics Partner",
+                                    text: "Seamless import/export solutions across continents"
+                                },
+                                {
+                                    title: "Worldwide Shipping Expertise",
+                                    text: "Navigating global trade regulations with precision"
+                                },
+                                {
+                                    title: "End-to-End Supply Chain",
+                                    text: "From origin to destination, we handle it all"
+                                },
+                                {
+                                    title: "Customs & Compliance",
+                                    text: "Expert handling of all documentation and regulations"
+                                },
+                                {
+                                    title: "24/7 Cargo Tracking",
+                                    text: "Real-time updates for your peace of mind"
+                                }
+                            ];
+                            
+                            const slideshow = document.getElementById('textSlideshow');
+                            let currentSlide = 0;
+                            let isAnimating = false;
+                            
+                            // Create slides
+                            slides.forEach((slide, index) => {
+                                const slideDiv = document.createElement('div');
+                                slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
+                                slideDiv.innerHTML = `
+                                    <h3 class="text-2xl md:text-4xl font-bold mb-4">${slide.title}</h3>
+                                    <p class="text-sm md:text-lg">${slide.text}</p>
+                                `;
+                                slideshow.appendChild(slideDiv);
+                            });
+                            
+                            const slideElements = document.querySelectorAll('.slide');
+                            
+                            function updateSlides() {
+                                if (isAnimating) return;
+                                isAnimating = true;
+                                
+                                // Fade out current slide
+                                const currentActive = document.querySelector('.slide.active');
+                                if (currentActive) {
+                                    currentActive.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                                    currentActive.style.opacity = '0';
+                                    currentActive.style.transform = 'translateY(-20px)';
+                                }
+                                
+                                // After fade out, update classes and fade in new slide
+                                setTimeout(() => {
+                                    slideElements.forEach((slide, index) => {
+                                        if (index === currentSlide) {
+                                            slide.classList.add('active');
+                                            slide.style.opacity = '0';
+                                            slide.style.transform = 'translateY(20px)';
+                                            // Force reflow
+                                            void slide.offsetWidth;
+                                            slide.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                                            slide.style.opacity = '1';
+                                            slide.style.transform = 'translateY(0)';
+                                        } else {
+                                            slide.classList.remove('active');
+                                            slide.style.opacity = '0';
+                                            slide.style.transform = 'translateY(20px)';
+                                        }
+                                    });
+                                    
+                                    isAnimating = false;
+                                }, 500); // Match this with the transition duration
+                            }
+                            
+                            function nextSlide() {
+                                currentSlide = (currentSlide + 1) % slides.length;
+                                updateSlides();
+                            }
+                            
+                            function goToSlide(index) {
+                                currentSlide = index;
+                                updateSlides();
+                                // Reset the timer when manually changing slides
+                                clearInterval(slideInterval);
+                                slideInterval = setInterval(nextSlide, 5000);
+                            }
+                            
+                            // Auto-advance slides every 5 seconds
+                            let slideInterval = setInterval(() => {
+                                if (!isAnimating) {
+                                    nextSlide();
+                                }
+                            }, 4000);
+                            
+                            // Pause on hover
+                            const videoContainer = document.querySelector('.group');
+                            let isHovered = false;
+                            
+                            videoContainer.addEventListener('mouseenter', () => {
+                                isHovered = true;
+                                clearInterval(slideInterval);
+                            });
+                            
+                            videoContainer.addEventListener('mouseleave', () => {
+                                isHovered = false;
+                                clearInterval(slideInterval);
+                                if (!isAnimating) {
+                                    slideInterval = setInterval(() => {
+                                        if (!isHovered) nextSlide();
+                                    }, 4000);
+                                }
+                            });
+                            
+                            // Touch support for mobile
+                            let touchStartX = 0;
+                            let touchEndX = 0;
+                            let touchStartTime = 0;
+                            
+                            videoContainer.addEventListener('touchstart', (e) => {
+                                touchStartX = e.changedTouches[0].screenX;
+                                touchStartTime = Date.now();
+                            }, { passive: true });
+                            
+                            videoContainer.addEventListener('touchend', (e) => {
+                                touchEndX = e.changedTouches[0].screenX;
+                                const touchTime = Date.now() - touchStartTime;
+                                
+                                // Only handle quick swipes
+                                if (touchTime < 300) {
+                                    const diff = touchStartX - touchEndX;
+                                    if (Math.abs(diff) > 50) { // Minimum swipe distance
+                                        if (diff > 0) {
+                                            nextSlide();
+                                        } else {
+                                            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                                            updateSlides();
+                                        }
+                                    }
+                                }
+                            }, { passive: true });
+                        });
+                    </script>
                     <!-- Content Column (Right) -->
                     <div class="w-full lg:w-1/2">
                         <div>
