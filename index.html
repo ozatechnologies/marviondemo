@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Marvion Exim</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(33, 29%, 58%)',
+                        secondary: 'hsl(210, 40%, 96.1%)',
+                        background: 'hsl(0, 0%, 100%)',
+                        foreground: 'hsl(222, 47%, 11%)',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Cormorant Garamond', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+        
+        /* Animation Keyframes */
+        @keyframes revealFromRight {
+            from { clip-path: inset(0 100% 0 0); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+
+        @keyframes revealFromLeft {
+            from { clip-path: inset(0 0 0 100%); }
+            to { clip-path: inset(0 0 0 0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                transform: translateX(-50px); 
+                opacity: 0; 
+            }
+            to { 
+                transform: translateX(0); 
+                opacity: 1; 
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-reveal-right {
+            clip-path: inset(0 100% 0 0);
+            opacity: 1;
+        }
+
+        .animate-reveal-right.animate {
+            animation: revealFromRight 1.2s ease-out forwards;
+        }
+        
+        .animate-slide-from-left {
+            animation: slideInLeft 2s ease-out forwards;
+            opacity: 1 !important;
+            color: inherit !important;
+            display: inline-block;
+        }
+        
+        .animate-slide-from-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-reveal-left {
+            clip-path: inset(0 0 0 100%);
+            opacity: 1;
+        }
+
+        .animate-reveal-left.animate {
+            animation: revealFromLeft 1.2s ease-out forwards;
+        }
+        .font-display { font-family: 'Poppins', sans-serif; }
+        .font-cormorant { 
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        
+        /* Testimonial Carousel Styles */
+        .testimonial-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+        
+        .testimonial-slide {
+            flex: 0 0 auto;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+        
+        @media (min-width: 1024px) {
+            .testimonial-slide {
+                width: 33.333%;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .testimonial-slide {
+                width: 50%;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .testimonial-slide {
+                width: 100%;
+            }
+        }
+        
+        
+        /* Smooth transitions */
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+        
+        /* Button hover effect */
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Gradient text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        .footer-main-container {
+            background-color: rgb(26, 26, 26);
+        }
+        
+        .footer-main-container .container {
+            padding: 3rem 1rem;
+        }
+        
+        .footer-main-container .grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-main-container .grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .footer-main-container .text-center {
+            text-align: center;
+        }
+        
+        .footer-main-container .md\:text-left {
+            text-align: left;
+        }
+        
+        .footer-main-container .bg-white {
+            background-color: white;
+        }
+        
+        .footer-main-container .p-4 {
+            padding: 1rem;
+        }
+        
+        .footer-main-container .rounded-lg {
+            border-radius: 0.5rem;
+        }
+        
+        .footer-main-container .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer-main-container .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-main-container .h-16 {
+            height: 4rem;
+        }
+        
+        .footer-main-container .w-auto {
+            width: auto;
+        }
+        
+        .footer-main-container .text-gray-300 {
+            color: #d1d5db;
+        }
+        
+        .footer-main-container .text-gray-400 {
+            color: #9ca3af;
+        }
+        
+        .footer-main-container .text-white {
+            color: white;
+        }
+        
+        .footer-main-container .hover\:text-primary:hover {
+            color: hsl(33, 29%, 58%);
+        }
+        
+        .footer-main-container .hover\:text-white:hover {
+            color: white;
+        }
+        
+        .footer-main-container .transition-colors {
+            transition-property: color, background-color, border-color;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .footer-main-container .font-display {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .footer-main-container .text-lg {
+            font-size: 1.125rem;
+        }
+        
+        .footer-main-container .font-semibold {
+            font-weight: 600;
+        }
+        
+        .footer-main-container .relative {
+            position: relative;
+        }
+        
+        .footer-main-container .pb-2 {
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-main-container .absolute {
+            position: absolute;
+        }
+        
+        .footer-main-container .bottom-0 {
+            bottom: 0;
+        }
+        
+        .footer-main-container .left-0 {
+            left: 0;
+        }
+        
+        .footer-main-container .w-12 {
+            width: 3rem;
+        }
+        
+        .footer-main-container .h-0\.5 {
+            height: 0.125rem;
+        }
+        
+        .footer-main-container .bg-primary {
+            background-color: hsl(33, 29%, 58%);
+        }
+        
+        .footer-main-container .space-y-3 > :not([hidden]) ~ :not([hidden]) {
+            margin-top: 0.75rem;
+        }
+        
+        .footer-main-container .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+            margin-top: 1rem;
+        }
+        
+        .footer-main-container .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+            margin-left: 1rem;
+        }
+        
+        .footer-main-container .space-x-6 > :not([hidden]) ~ :not([hidden]) {
+            margin-left: 1.5rem;
+        }
+        
+        .footer-main-container .gap-3 {
+            gap: 0.75rem;
+        }
+        
+        .footer-main-container .gap-8 {
+            gap: 2rem;
+        }
+        
+        .footer-main-container .flex {
+            display: flex;
+        }
+        
+        .footer-main-container .items-center {
+            align-items: center;
+        }
+        
+        .footer-main-container .items-start {
+            align-items: flex-start;
+        }
+        
+        .footer-main-container .justify-center {
+            justify-content: center;
+        }
+        
+        .footer-main-container .justify-between {
+            justify-content: space-between;
+        }
+        
+        .footer-main-container .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+        
+        .footer-main-container .flex-col {
+            flex-direction: column;
+        }
+        
+        .footer-main-container .bg-primary\/10 {
+            background-color: hsl(33 29% 58% / 0.1);
+        }
+        
+        .footer-main-container .p-2 {
+            padding: 0.5rem;
+        }
+        
+        .footer-main-container .rounded-full {
+            border-radius: 9999px;
+        }
+        
+        .footer-main-container .group:hover .group-hover\:bg-primary\/20 {
+            background-color: hsl(33 29% 58% / 0.2);
+        }
+        
+        .footer-main-container .group:hover .group-hover\:text-white {
+            color: white;
+        }
+        
+        .footer-main-container .border-t {
+            border-top-width: 1px;
+        }
+        
+        .footer-main-container .border-gray-800 {
+            border-color: #1f2937;
+        }
+        
+        .footer-main-container .pt-8 {
+            padding-top: 2rem;
+        }
+        
+        .footer-main-container .md\:flex-row {
+            flex-direction: row;
+        }
+        
+        .footer-main-container .md\:mb-0 {
+            margin-bottom: 0;
+        }
+        
+        .footer-main-container .text-sm {
+            font-size: 0.875rem;
+        }
+        
+        .footer-main-container .font-medium {
+            font-weight: 500;
+        }
+        
+        .footer-main-container .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-main-container .italic {
+            font-style: italic;
+        }
+        
+        .footer-main-container .tracking-wider {
+            letter-spacing: 0.05em;
+        }
+        
+        .footer-main-container .hover\:text-primary:hover {
+            color: hsl(33, 29%, 58%);
+        }
+        
+        .footer-main-container .hover\:text-blue-400:hover {
+            color: #60a5fa;
+        }
+        
+        .footer-main-container .hover\:text-blue-600:hover {
+            color: #2563eb;
+        }
+        
+        .footer-main-container .hover\:text-pink-500:hover {
+            color: #ec4899;
+        }
+        
+        .footer-main-container .hover\:pl-2:hover {
+            padding-left: 0.5rem;
+        }
+        
+        .footer-main-container .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .footer-main-container .duration-300 {
+            transition-duration: 300ms;
+        }
+        
+        .footer-main-container .h-5 {
+            height: 1.25rem;
+        }
+        
+        .footer-main-container .w-5 {
+            width: 1.25rem;
+        }
+        
+        .footer-main-container .h-4 {
+            height: 1rem;
+        }
+        
+        .footer-main-container .w-4 {
+            width: 1rem;
+        }
+        
+        .footer-main-container .mr-2 {
+            margin-right: 0.5rem;
+        }
+        
+        .footer-main-container .mr-3 {
+            margin-right: 0.75rem;
+        }
+        
+        .footer-main-container .mb-12 {
+            margin-bottom: 3rem;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-main-container .md\:text-left {
+                text-align: left;
+            }
+            
+            .footer-main-container .md\:flex-row {
+                flex-direction: row;
+            }
+            
+            .footer-main-container .md\:mb-0 {
+                margin-bottom: 0;
+            }
+        }
+        
+        /* Base Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        
+        .animate-fade-in-down {
+            animation: fadeInDown 0.8s ease-out forwards;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Hover Animations */
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.03);
+        }
+        
+        /* Slide animations */
+        .slide {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            z-index: 1;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+    <style>
+        /* Hero Section Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        
+        .slide > div:first-child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+    <!-- HEADER -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100 py-4">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center cursor-pointer">
+                <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto object-contain">
+            </a>
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium text-primary uppercase tracking-wide transition-colors hover:text-primary">Home</a>
+                <a href="about.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">About</a>
+                <a href="products.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Products</a>
+                <a href="export.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Export</a>
+                <a href="catalogues.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Catalogues</a>
+                <a href="information.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Information</a>
+                <a href="contact.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Get In Touch</a>
+            </nav>
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="contact.html" class="hidden xl:flex items-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                    Reach To Us 📍
+                </a>
+            </div>
+            <button class="lg:hidden p-2" onclick="document.getElementById('mobile-menu').classList.toggle('translate-x-full')">
+                ☰
+            </button>
+        </div>
+        <!-- Animation on Scroll Initialization -->
+    <script>
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                rect.bottom >= 0
+            );
+        }
+
+        // Function to handle scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                if (isInViewport(element)) {
+                    element.classList.add('opacity-100', 'translate-x-0', 'translate-y-0');
+                    element.classList.remove('opacity-0');
+                }
+            });
+            
+            // Animate stats when in view
+            const statsSection = document.getElementById('stats-section');
+            if (statsSection && isInViewport(statsSection)) {
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000; // 2 seconds
+                    const step = (target / duration) * 10;
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target;
+                            if (counter.nextElementSibling && counter.nextElementSibling.classList.contains('counter-suffix')) {
+                                counter.nextElementSibling.style.opacity = '1';
+                            }
+                        }
+                    };
+                    
+                    updateCounter();
+                });
+            }
+        }
+
+        // Product Slideshow Data
+        const products = [
+            {
+                title: 'Fish Protein Powder',
+                subtitle: 'Premium Food Grade',
+                description: 'High-quality protein powder derived from fresh fish, perfect for nutritional supplements and food applications.',
+                image: 'https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'High Protein Fish Meal',
+                subtitle: 'Feed Grade',
+                description: 'Nutrient-rich fish meal for animal feed, providing essential proteins and minerals for healthy growth.',
+                image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Vitrified Tiles',
+                subtitle: 'Premium Flooring Solution',
+                description: 'Durable and stylish vitrified tiles for modern interiors, available in various designs and finishes.',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Roofing Tiles',
+                subtitle: 'Durable & Weatherproof',
+                description: 'High-quality roofing solutions that combine durability with aesthetic appeal for all types of buildings.',
+                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Sanitaryware',
+                subtitle: 'Modern Bathroom Solutions',
+                description: 'Elegant and functional sanitaryware to enhance your bathroom experience with contemporary designs.',
+                image: 'https://images.unsplash.com/photo-1600566751983-8a2b3bd5a0d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Bathroom Accessories',
+                subtitle: 'Complete Range',
+                description: 'Premium bathroom fixtures and accessories to complement your modern bathroom design.',
+                image: 'https://images.unsplash.com/photo-1564540583246-934409427776?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Tiles Chemical',
+                subtitle: 'Professional Grade',
+                description: 'High-performance chemicals for tile installation and maintenance, ensuring long-lasting results.',
+                image: 'https://images.unsplash.com/photo-1581092921461-39b2f2f8b4f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'FRP Manhole Cover',
+                subtitle: 'Durable & Lightweight',
+                description: 'Fiberglass Reinforced Plastic manhole covers that are strong, durable, and corrosion-resistant.',
+                image: 'https://images.unsplash.com/photo-1615213612137-8c0a1b2b4b4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Disposable Tableware',
+                subtitle: 'Eco-friendly Options',
+                description: 'High-quality disposable tableware for catering, parties, and food service businesses.',
+                image: 'https://images.unsplash.com/photo-1599458252573-56ae36120de1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Woven Polypropylene Bags',
+                subtitle: 'Heavy Duty',
+                description: 'Durable and reusable woven polypropylene bags for various industrial and agricultural applications.',
+                image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Polypropylene Corrugated Sheets',
+                subtitle: 'Versatile & Durable',
+                description: 'Lightweight yet strong polypropylene sheets for packaging, signage, and industrial applications.',
+                image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Aluminium Composite Panel',
+                subtitle: 'Modern Cladding Solution',
+                description: 'High-quality ACP sheets for exterior and interior cladding, available in various colors and finishes.',
+                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Synthetic Organic Coloring Matter Pigment',
+                subtitle: 'Vibrant & Long-lasting',
+                description: 'High-quality pigments for various industrial applications, ensuring vibrant and durable colors.',
+                image: 'https://images.unsplash.com/photo-1470337458703-46ad9216e1d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'India\'s Finest Rice',
+                subtitle: 'Premium Quality',
+                description: 'Export-quality Indian rice varieties, carefully selected and processed for the best taste and texture.',
+                image: 'https://images.unsplash.com/photo-1541014741259-de529411b96a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'India\'s Spices',
+                subtitle: 'Aromatic & Flavorful',
+                description: 'Premium quality Indian spices, carefully sourced and processed to retain their authentic aroma and flavor.',
+                image: 'https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            },
+            {
+                title: 'Handicraft Products',
+                subtitle: 'Artisanal Excellence',
+                description: 'Exquisite Indian handicrafts showcasing traditional craftsmanship and contemporary designs.',
+                image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
+            }
+        ];
+
+        // Initialize Slideshow
+        function initSlideshow() {
+            const slideshow = document.getElementById('product-slideshow');
+            const dotsContainer = document.getElementById('slide-dots');
+            
+            // Return early if slideshow element doesn't exist
+            if (!slideshow) return;
+            
+            let currentSlide = 0;
+            let slideInterval;
+
+            // Create slides
+            products.forEach((product, index) => {
+                // Create slide with full-screen background and centered content
+                const slide = document.createElement('div');
+                slide.className = `slide ${index === 0 ? 'active' : ''}`;
+                slide.innerHTML = `
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('${product.image}')"></div>
+                    <div class="absolute inset-0 bg-black/40"></div>
+                    <div class="slide-content">
+                        <h2 class="text-4xl md:text-6xl font-light mb-4 font-display">${product.title}</h2>
+                        <p class="text-primary text-2xl md:text-3xl mb-6 font-medium">${product.subtitle}</p>
+                        <p class="text-white text-lg md:text-xl max-w-3xl mx-auto">${product.description}</p>
+                    </div>
+                `;
+                slideshow.appendChild(slide);
+            });
+
+            const slides = document.querySelectorAll('.slide');
+
+            function showSlide(index) {
+                // Update current slide
+                currentSlide = (index + products.length) % products.length;
+                
+                // Update slides
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === currentSlide);
+                });
+                
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentSlide);
+                });
+                
+                // Reset autoplay timer
+                resetAutoplay();
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function resetAutoplay() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+            }
+
+            // Start autoplay
+            resetAutoplay();
+
+            // No hover pause
+
+            // No keyboard navigation
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initSlideshow();
+            // Initialize scroll animations
+            window.addEventListener('scroll', handleScrollAnimations);
+            
+            // Add hover effect to cards
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleX = (y - centerY) / 20;
+                    const angleY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+                    card.style.boxShadow = `${-angleY}px ${angleX}px 20px rgba(0,0,0,0.1)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                    card.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+                });
+            });
+
+            // Add animation to navigation links
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseover', () => {
+                    link.style.transform = 'translateY(-2px)';
+                    link.style.transition = 'transform 0.3s ease';
+                });
+                link.addEventListener('mouseout', () => {
+                    link.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add animation to buttons
+            const buttons = document.querySelectorAll('button, .btn, a[role="button"]');
+            buttons.forEach(button => {
+                button.addEventListener('mousedown', () => {
+                    button.style.transform = 'scale(0.98)';
+                });
+                button.addEventListener('mouseup', () => {
+                    button.style.transform = 'scale(1)';
+                });
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+
+    <!-- Mobile Menu -->
+    <div class="lg:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50" id="mobile-menu">
+            <div class="flex flex-col h-full p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-12 w-auto">
+                    <button onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="text-gray-500 hover:text-gray-700">✕</button>
+                </div>
+                <nav class="flex-1 flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Home</a>
+                    <a href="about.html" class="text-primary hover:text-primary transition-colors py-2 border-b border-gray-100">About</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Products</a>
+                    <a href="export.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Export</a>
+                    <a href="catalogues.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Catalogues</a>
+                    <a href="information.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Information</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Get In Touch</a>
+                </nav>
+                <div class="pt-4 mt-auto">
+                    <a href="contact.html" class="w-full flex items-center justify-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                        Reach To Us 📍
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION - COMPLETE STANDALONE CODE -->
+    <style>
+        /* HERO SECTION STYLES */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 3;
+        }
+
+        .hero-wrapper {
+            position: relative;
+            z-index: 4;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-container .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .hero-content-wrapper {
+            max-width: 800px;
+            text-align: center;
+            animation: contentFadeIn 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .animate-slide-from-left {
+           animation: slideInLeft 2s ease-out forwards;
+           opacity: 1 !important;
+           color: inherit !important;
+           display: inline-block;
+       }
+        
+        .animate-slide-from-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(40px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes textSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pre-title {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(0.75rem, 1.3vw, 0.95rem);
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+            animation: textSlideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s both;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 9vw, 4.5rem);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.01em;
+            animation: textSlideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s both;
+        }
+
+        .hero-title span {
+            font-style: italic;
+            font-weight: 400;
+            display: inline;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 2.2vw, 1.3rem);
+            font-weight: 400;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            animation: textSlideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.45s both;
+        }
+
+        .hero-disc {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 2.8rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: textSlideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
+        }
+
+        .rts-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            padding: clamp(0.9rem, 2vw, 1.15rem) clamp(2.2rem, 4vw, 3rem);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 0;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            position: relative;
+            overflow: hidden;
+            animation: textSlideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.75s both;
+        }
+
+        .counter {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+        }
+        .stats-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .stats-item h3 {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.5px;
+        }
+        .stats-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .rts-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: hsl(33, 29%, 58%);
+            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .rts-btn:hover {
+            border-color: hsl(33, 29%, 58%);
+            color: #ffffff;
+        }
+
+        .rts-btn:hover::before {
+            left: 0;
+        }
+
+        .rts-btn i {
+            font-size: clamp(0.85rem, 1.6vw, 1rem);
+            transition: transform 0.4s ease;
+        }
+
+        .rts-btn:hover i {
+            transform: translateX(2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                height: auto;
+                min-height: 100vh;
+                padding: 6rem 0;
+            }
+
+            .hero-wrapper {
+                align-items: center;
+                padding: 2rem 0;
+            }
+
+            .hero-title {
+                word-spacing: 0.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-container .container {
+                padding: 0 1rem;
+            }
+
+            .hero-content-wrapper {
+                max-width: 100%;
+            }
+
+            .pre-title {
+                margin-bottom: 0.75rem;
+            }
+
+            .hero-title {
+                margin-bottom: 1rem;
+            }
+
+            .hero-disc {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+
+    <!-- HERO HTML SECTION -->
+    <section class="hero-container" id="heroSection">
+        <!-- Slides -->
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1589307004173-8c816d7bfd1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600605150732-1d8f8c1a4b5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600566751982-8d4f3d3b9f1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600566752350-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1542838132-92d533f92e0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1563245372-f20324f38506?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1509448162273-43c76b6a7787?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1598971861713-54ad16a7e72e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a3bc206b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581093450030-2de4291aeab1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1601050690597-df0568f92e0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1580010414200-b8aacd2cbfb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');"></div>
+
+        <!-- Dark Overlay -->
+        <div class="hero-overlay"></div>
+
+        <!-- Content Wrapper -->
+        <div class="hero-wrapper">
+            <div class="container">
+                <div class="hero-content-wrapper">
+                    <span class="pre-title" id="heroSubtitle">Global Excellence</span>
+                    <h1 class="hero-title" id="heroTitle">Marvion <span>Exim</span></h1>
+                    <p class="hero-subtitle" id="heroSubtext">Import & Export Company</p>
+                    <p class="hero-disc" id="heroDescription">
+                        Delivering premium quality products across the globe with integrity, excellence, and a commitment to your success.
+                    </p>
+                    <a href="products.html" class="rts-btn" id="heroButton">
+                        Explore Products <i class="fa-regular fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Testimonial Carousel Styles */
+        .testimonial-carousel {
+            position: relative;
+            padding: 0 40px;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .testimonial-slide {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .testimonial-slide {
+                width: 100%;
+            }
+        }
+    </style>
+    
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('testimonialTrack');
+            if (!track) {
+                console.error('Testimonial track element not found');
+                return;
+            }
+            
+            // Clone first few slides and append to end for infinite effect
+            const slides = document.querySelectorAll('.testimonial-slide');
+            if (!slides.length) {
+                console.error('No testimonial slides found');
+                return;
+            }
+            
+            // Clone slides for infinite effect
+            const cloneCount = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+            for (let i = 0; i < cloneCount; i++) {
+                const clone = slides[i].cloneNode(true);
+                track.appendChild(clone);
+            }
+            
+            const allSlides = document.querySelectorAll('.testimonial-slide');
+            const slideCount = slides.length;
+            const totalSlides = allSlides.length;
+            let currentSlide = 0;
+            let slideWidth = 0;
+            let autoSlideInterval;
+            let isAnimating = false;
+            
+            // Set initial transition
+            track.style.transition = 'transform 0.5s ease-in-out';
+            
+            // Calculate slide width based on viewport
+            function updateSlideWidth() {
+                if (window.innerWidth >= 1024) {
+                    slideWidth = 100 / 3; // 3 slides visible on large screens
+                } else if (window.innerWidth >= 768) {
+                    slideWidth = 50; // 2 slides visible on medium screens
+                } else {
+                    slideWidth = 100; // 1 slide visible on small screens
+                }
+                updateTrackPosition();
+            }
+            
+            function updateTrackPosition() {
+                const offset = -currentSlide * slideWidth;
+                track.style.transform = `translateX(${offset}%)`;
+            }
+            
+            function goToSlide(index, instant = false) {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                if (instant) {
+                    track.style.transition = 'none';
+                } else {
+                    track.style.transition = 'transform 0.5s ease-in-out';
+                }
+                
+                currentSlide = index;
+                updateTrackPosition();
+                
+                if (!instant) {
+                    // Reset position if we've reached the cloned slides
+                    if (currentSlide >= slideCount) {
+                        setTimeout(() => {
+                            track.style.transition = 'none';
+                            currentSlide = 0;
+                            updateTrackPosition();
+                            void track.offsetWidth; // Force reflow
+                            isAnimating = false;
+                        }, 500);
+                    } else {
+                        setTimeout(() => { isAnimating = false; }, 500);
+                    }
+                } else {
+                    isAnimating = false;
+                }
+            }
+            
+            function nextSlide() {
+                if (currentSlide >= totalSlides - 1) {
+                    goToSlide(0, true);
+                    setTimeout(() => goToSlide(1), 50);
+                } else {
+                    goToSlide(currentSlide + 1);
+                }
+            }
+            
+            function startAutoSlide() {
+                stopAutoSlide();
+                autoSlideInterval = setInterval(nextSlide, 4000);
+            }
+            
+            function stopAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                }
+            }
+            
+            // Initialize the carousel
+            updateSlideWidth();
+            startAutoSlide();
+            
+            // Pause on hover
+            track.addEventListener('mouseenter', stopAutoSlide);
+            track.addEventListener('mouseleave', startAutoSlide);
+            
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    // Remove all cloned slides
+                    while (track.children.length > slideCount) {
+                        track.removeChild(track.lastChild);
+                    }
+                    
+                    // Re-clone slides based on new viewport
+                    const newCloneCount = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+                    for (let i = 0; i < newCloneCount; i++) {
+                        const clone = track.children[i].cloneNode(true);
+                        track.appendChild(clone);
+                    }
+                    
+                    updateSlideWidth();
+                    startAutoSlide();
+                }, 250);
+            });
+        });
+    </script>
+    
+    <script>
+        // Product data for hero slider
+        const heroProducts = [
+            {
+                subtitle: "Marvion Exim",
+                title: "Fish Protein <span>Powder</span>",
+                description: "High-quality food grade protein powder and high-protein fish meal for nutritional supplements and feed applications.",
+                button: "About Marvion",
+                url: "#fish-protein"
+            },
+            {
+                subtitle: "Marvion Exim",
+                title: "Fish <span>Meal</span>",
+                description: "Premium feed-grade fish meal packed with essential proteins and nutrients for optimal animal growth and development.",
+                button: "Explore More",
+                url: "#fish-meal"
+            },
+            {
+                subtitle: "Timeless Elegance",
+                title: "Vitrified <span>Tiles</span>",
+                description: "Premium quality vitrified tiles for modern interiors and exteriors with superior durability and aesthetic appeal.",
+                button: "View Gallery",
+                url: "#vitrified-tiles"
+            },
+            {
+                subtitle: "Timeless Elegance",
+                title: "Roofing <span>Tiles</span>",
+                description: "Durable and weather-resistant roofing solutions for every structure, combining style with exceptional performance.",
+                button: "Explore Options",
+                url: "#roofing-tiles"
+            },
+            {
+                subtitle: "Luxury Bathing",
+                title: "Sanitaryware <span>Collection</span>",
+                description: "Elegant and hygienic sanitaryware for modern bathrooms with contemporary design and exceptional quality.",
+                button: "View Range",
+                url: "#sanitaryware"
+            },
+            {
+                subtitle: "Luxury Bathing",
+                title: "Bathroom <span>Accessories</span>",
+                description: "Premium bathroom accessories to complement your modern bathroom design with style and functionality.",
+                button: "Browse More",
+                url: "#accessories"
+            },
+            {
+                subtitle: "Professional Care",
+                title: "Tiles <span>Chemical</span>",
+                description: "Specialized chemicals for tile installation, maintenance, and long-lasting protection of your surfaces.",
+                button: "Learn More",
+                url: "#tiles-chemical"
+            },
+            {
+                subtitle: "Infrastructure Solutions",
+                title: "FRP <span>Manhole Covers</span>",
+                description: "Durable and lightweight fiberglass reinforced plastic manhole covers for urban infrastructure needs.",
+                button: "View Products",
+                url: "#frp-manhole"
+            },
+            {
+                subtitle: "Dining Elegance",
+                title: "Premium <span>Crockery</span>",
+                description: "Stylish crockery and dinnerware sets to enhance your dining experience with elegance and durability.",
+                button: "View Collection",
+                url: "#crockery"
+            },
+            {
+                subtitle: "Ventilation Excellence",
+                title: "Louvers <span>Panels</span>",
+                description: "Functional and stylish louver panels for optimal ventilation and modern architectural design.",
+                button: "Explore Options",
+                url: "#louvers"
+            },
+            {
+                subtitle: "Eco-Friendly Solutions",
+                title: "Disposable <span>Tableware</span>",
+                description: "Sustainable and convenient disposable tableware solutions for events and food service industries.",
+                button: "View Products",
+                url: "#disposable-tableware"
+            },
+            {
+                subtitle: "Packaging Excellence",
+                title: "PP Bulk <span>Bags</span>",
+                description: "Durable and reusable woven polypropylene bags for bulk packaging of various commodities.",
+                button: "Learn More",
+                url: "#pp-bags"
+            },
+            {
+                subtitle: "Packaging Excellence",
+                title: "PP Corrugated <span>Sheets</span>",
+                description: "Lightweight yet durable corrugated polypropylene sheets for packaging and industrial applications.",
+                button: "View Options",
+                url: "#pp-sheets"
+            },
+            {
+                subtitle: "Modern Cladding",
+                title: "Aluminum Composite <span>Panels</span>",
+                description: "Lightweight, durable and weather-resistant panels for contemporary architectural facades and designs.",
+                button: "Explore Collection",
+                url: "#acp"
+            },
+            {
+                subtitle: "Vibrant Colors",
+                title: "Organic <span>Pigments</span>",
+                description: "High-quality synthetic organic coloring matter for various industrial and decorative applications.",
+                button: "Discover Colors",
+                url: "#pigments"
+            },
+            {
+                subtitle: "Heritage Grains",
+                title: "India's Finest <span>Rice</span>",
+                description: "Premium quality rice varieties sourced from the finest farms across the Indian subcontinent.",
+                button: "View Varieties",
+                url: "#rice"
+            },
+            {
+                subtitle: "Aromatic Delights",
+                title: "India's Finest <span>Spices</span>",
+                description: "Premium quality spices that bring authentic Indian flavors and aroma to your kitchen.",
+                button: "Explore Range",
+                url: "#spices"
+            },
+            {
+                subtitle: "Artisanal Heritage",
+                title: "Handicraft <span>Products</span>",
+                description: "Exquisite handcrafted items showcasing India's rich cultural heritage and master craftsmanship.",
+                button: "Discover Crafts",
+                url: "#handicrafts"
+            }
+        ];
+
+        let currentHeroIndex = 0;
+
+        // DOM elements
+        const heroSection = document.getElementById('heroSection');
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const heroSubtitle = document.getElementById('heroSubtitle');
+        const heroTitle = document.getElementById('heroTitle');
+        const heroDescription = document.getElementById('heroDescription');
+        const heroButton = document.getElementById('heroButton');
+        const contentWrapper = document.querySelector('.hero-content-wrapper');
+
+        // Update slide content
+        function updateHeroSlide(index) {
+            const product = heroProducts[index];
+
+            // Update slides
+            heroSlides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Animate content
+            contentWrapper.style.animation = 'none';
+            setTimeout(() => {
+                heroSubtitle.textContent = product.subtitle;
+                heroTitle.innerHTML = product.title;
+                heroDescription.textContent = product.description;
+                heroButton.href = product.url;
+                heroButton.innerHTML = product.button + ' <i class="fa-regular fa-arrow-right"></i>';
+                contentWrapper.style.animation = 'contentFadeIn 0.9s ease-out forwards';
+            }, 50);
+        }
+
+        // Next slide
+        function nextHeroSlide() {
+            currentHeroIndex = (currentHeroIndex + 1) % heroProducts.length;
+            updateHeroSlide(currentHeroIndex);
+        }
+
+        // Auto-advance slides every 4 seconds
+        let heroSlideInterval = setInterval(nextHeroSlide, 4000);
+
+        // Reset interval
+        function resetHeroInterval() {
+            clearInterval(heroSlideInterval);
+            heroSlideInterval = setInterval(nextHeroSlide, 4000);
+        }
+
+        // Button interaction
+        heroButton.addEventListener('click', resetHeroInterval);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextHeroSlide();
+                resetHeroInterval();
+            } else if (e.key === 'ArrowLeft') {
+                currentHeroIndex = (currentHeroIndex - 1 + heroProducts.length) % heroProducts.length;
+                updateHeroSlide(currentHeroIndex);
+                resetHeroInterval();
+            }
+        });
+
+        // Initialize
+        updateHeroSlide(0);
+    </script>
+
+    <main class="flex-grow">
+        <!-- ABOUT SECTION -->
+        <section class="py-16 md:py-24 bg-white overflow-hidden relative">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Animated Decorative Elements -->
+                    <div class="absolute -left-20 -top-20 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+                    <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl"></div>
+                    
+                    <!-- Content Column -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="animate-slide-from-left" style="animation-delay: 0.2s;">
+                            <span class="text-primary font-medium tracking-widest text-sm uppercase">About Us</span>
+                            <h2 class="text-5xl md:text-6xl font-display font-light text-gray-900 mt-4 mb-8">
+                                <span class="animate-slide-from-left" style="display: inline-block; animation-delay: 0.3s;">Marvion Exim</span>
+                            </h2>
+                            <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                                Marvion Exim is a premier global trading company specializing in the import and export of high-quality products. With a strong commitment to excellence and customer satisfaction, we source and supply a diverse range of premium products to clients worldwide. Our expertise in international trade ensures seamless transactions and reliable delivery across borders.
+                            </p>
+                        </div>
+
+                        <div class="space-y-5 mb-8 animate-slide-from-left" style="animation-delay: 0.4s;">
+                            <div class="flex items-start space-x-4">
+                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                <div>
+                                    <h3 class="font-medium text-gray-900 font-display text-xl">Global Reach</h3>
+                                    <p class="text-gray-600 text-sm mt-1">Extensive network across multiple continents</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                <div>
+                                    <h3 class="font-medium text-gray-900 font-display text-xl">Best Logistics</h3>
+                                    <p class="text-gray-600 text-sm mt-1">Seamless supply chain with real-time tracking and customs support</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                <div>
+                                    <h3 class="font-medium text-gray-900 font-display text-xl">Quality Assured</h3>
+                                    <p class="text-gray-600 text-sm mt-1">Premium products with strict quality control standards</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Image Column -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="relative overflow-hidden rounded-lg shadow-xl h-96 lg:h-[500px] animate-reveal-right">
+                            <img src="https://i.ibb.co/pj5043wC/m-3.png" 
+                                 alt="Marvion Exim" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </section>
+
+        <!-- WHY CHOOSE US SECTION -->
+        <section class="pt-8 md:pt-12 pb-16 md:pb-24 bg-gray-50 overflow-hidden relative">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Image Column (Left) -->
+                    <!-- Video Column (Left) -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="relative overflow-hidden rounded-lg shadow-xl bg-gray-900 aspect-video">
+                            <div class="relative h-0 pb-[56.25%]">
+                                <iframe   
+                                    src="https://player.cloudinary.com/embed/?cloud_name=dcqre7nop&public_id=cargo-port-drone&autoplay=true&loop=true&muted=true&controls=false&transformation[crop]=fill&transformation[gravity]=center"   
+                                    class="absolute top-0 left-0 w-full h-full"
+                                    style="border: none; object-fit: cover;"
+                                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                                    title="Cargo port drone video">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content Column (Right) -->
+                    <div class="w-full lg:w-1/2">
+                        <div>
+                            <span class="text-primary font-medium tracking-widest text-sm uppercase">Why Choose Us</span>
+                            <h2 class="text-5xl md:text-6xl font-display font-light text-gray-900 mt-4 mb-8">
+                                <span>Exceptional Import & Export</span>
+                            </h2>
+                            <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                                At Marvion Exim, we distinguish ourselves through unwavering commitment to excellence and meticulous operational precision. Our bespoke import and export solutions navigate the complexities of international commerce with unparalleled sophistication. We leverage decades of industry expertise to ensure every transaction reflects our hallmark standards of professionalism, integrity, and exquisite business acumen.
+                            </p>
+                        </div>
+
+                        <div class="space-y-5 mb-8 animate-slide-from-right" style="animation-delay: 0.4s;">
+                            <div class="flex items-start space-x-4">
+                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                <div>
+                                    <h3 class="font-medium text-gray-900 font-display text-xl">Uncompromising Quality</h3>
+                                    <p class="text-gray-600 text-sm mt-1">Rigorous protocols ensuring every product meets exacting international specifications</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                <div>
+                                    <h3 class="font-medium text-gray-900 font-display text-xl">Strategic Global Partnerships</h3>
+                                    <p class="text-gray-600 text-sm mt-1">Cultivated relationships across continents providing unparalleled market access</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                <div>
+                                    <h3 class="font-medium text-gray-900 font-display text-xl">Bespoke Logistics Solutions</h3>
+                                    <p class="text-gray-600 text-sm mt-1">Sophisticated supply chain with real-time transparency and white-glove handling</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorative elements -->
+            <div class="absolute -left-20 -top-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl"></div>
+            <div class="absolute -right-20 -bottom-20 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
+        </section>
+                                
+    </main>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-primary font-medium tracking-widest text-sm uppercase">Our Testimonial</span>
+                <h2 class="text-3xl md:text-4xl font-light text-gray-900 mt-2 font-display">What our clients say about us</h2>
+            </div>
+
+                <div class="relative">
+                    <div class="testimonial-carousel overflow-hidden">
+                        <div class="testimonial-track flex transition-transform duration-500 ease-in-out" id="testimonialTrack">
+                            <!-- Testimonial 1-10 -->
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">Marvion Exim's global sourcing capabilities have transformed our supply chain. Their attention to quality and timely delivery is unmatched in the industry.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">JD</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">John Davidson</h4>
+                                            <p class="text-sm text-gray-500">Procurement Director, Global Retail Inc.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The team at Marvion Exim provided exceptional logistics support for our cross-border shipments. Their expertise in customs clearance saved us both time and money.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">SR</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Sarah Roberts</h4>
+                                            <p class="text-sm text-gray-500">VP Operations, TechGlobal Solutions</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">Working with Marvion Exim has been a game-changer for our business. Their market insights and supplier network in Asia are truly impressive.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">MK</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Michael Kim</h4>
+                                            <p class="text-sm text-gray-500">CEO, Elite Imports LLC</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">Outstanding service and product quality. Our customers are extremely satisfied with the fish protein powder's performance in our supplements.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">EC</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Emily Chen</h4>
+                                            <p class="text-sm text-gray-500">Product Manager, NutriWell</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The pigments have exceeded our expectations in terms of quality and consistency. Highly recommended for industrial applications.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">DK</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">David Kim</h4>
+                                            <p class="text-sm text-gray-500">R&D Director, ColorTech</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">Reliable supplier with excellent customer service. The fish protein powder meets all our quality standards and specifications.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">JW</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">James Wilson</h4>
+                                            <p class="text-sm text-gray-500">Procurement Manager, VitaLife</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The color consistency of the pigments is remarkable. It has significantly improved our manufacturing process.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">LW</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Lisa Wong</h4>
+                                            <p class="text-sm text-gray-500">Production Head, ColorMasters</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">Excellent product quality and on-time delivery. The fish protein powder has helped us create superior nutritional supplements.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">RT</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Robert Taylor</h4>
+                                            <p class="text-sm text-gray-500">CEO, NutraScience</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The pigments maintain their vibrancy even after extensive processing. A reliable partner for our manufacturing needs.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">JL</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Jennifer Lee</h4>
+                                            <p class="text-sm text-gray-500">Quality Control, ChromaTech</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">Consistently high-quality fish protein powder that meets our strict standards. A trusted supplier for our supplement line.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">TB</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Thomas Brown</h4>
+                                            <p class="text-sm text-gray-500">Product Manager, VitaPlus</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 11-20 -->
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The fish protein powder's solubility is excellent, making it perfect for our ready-to-drink protein shakes.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">DP</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Daniel Park</h4>
+                                            <p class="text-sm text-gray-500">Product Developer, NutriBlend</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">These pigments have helped us achieve the exact shades we needed for our premium product line.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">SM</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Sophia Martinez</h4>
+                                            <p class="text-sm text-gray-500">Design Director, ColorVista</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The protein content and amino acid profile of their fish protein powder is superior to other suppliers we've tried.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">KZ</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Kevin Zhang</h4>
+                                            <p class="text-sm text-gray-500">R&D Manager, ProNutra</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The color consistency batch after batch is impressive. It's rare to find such reliability in pigments.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">OJ</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Olivia Johnson</h4>
+                                            <p class="text-sm text-gray-500">Production Lead, ColorFlow</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">Their fish protein powder has helped us create high-protein snacks with excellent texture and taste.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">RM</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Ryan Miller</h4>
+                                            <p class="text-sm text-gray-500">Product Developer, SnackWell</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The pigments blend perfectly with our formulations, providing consistent results every time.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">EW</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Ethan Wilson</h4>
+                                            <p class="text-sm text-gray-500">Formulation Chemist, ChromaBlend</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The fish protein powder's neutral taste profile makes it incredibly versatile for our product range.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">MT</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Mia Thompson</h4>
+                                            <p class="text-sm text-gray-500">Head of Product, NutriBliss</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The color intensity of these pigments allows us to use less product while achieving vibrant results.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">LB</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Lucas Brown</h4>
+                                            <p class="text-sm text-gray-500">Production Manager, ColorVibe</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The protein powder's fine texture ensures smooth blending in all our formulations without any grittiness.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">AG</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Ava Garcia</h4>
+                                            <p class="text-sm text-gray-500">Product Developer, NutriBlend</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The pigments are extremely stable under various processing conditions, making them ideal for our needs.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">NM</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Noah Martinez</h4>
+                                            <p class="text-sm text-gray-500">Technical Director, ChromaTech</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+                                <div class="bg-white p-8 rounded-lg shadow-lg h-full border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                                    <div class="text-yellow-400 text-2xl mb-4">"</div>
+                                    <p class="text-gray-600 mb-6">The fish protein powder's high protein content has allowed us to create more potent supplements.</p>
+                                    <div class="flex items-center">
+                                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-xl font-bold text-primary">IL</div>
+                                        <div class="ml-4">
+                                            <h4 class="font-semibold text-gray-900">Isabella Lee</h4>
+                                            <p class="text-sm text-gray-500">Nutrition Scientist, VitaCore</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+        <section class="py-20 bg-primary text-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+                    <div class="stats-item" data-count="25" data-suffix="+">
+                        <h3 class="text-4xl md:text-5xl font-bold mb-2 font-display font-cormorant tracking-tight counter">0</h3>
+                        <p class="text-white/80 font-medium uppercase text-xs tracking-wider">Global Trade Partners</p>
+                    </div>
+                    <div class="stats-item" data-count="50" data-suffix="+">
+                        <h3 class="text-4xl md:text-5xl font-bold mb-2 font-display font-cormorant tracking-tight counter">0</h3>
+                        <p class="text-white/80 font-medium uppercase text-xs tracking-wider">Product Categories</p>
+                    </div>
+                    <div class="stats-item" data-count="1000" data-suffix="+">
+                        <h3 class="text-4xl md:text-5xl font-bold mb-2 font-display font-cormorant tracking-tight counter">0</h3>
+                        <p class="text-white/80 font-medium uppercase text-xs tracking-wider">Annual Shipments</p>
+                    </div>
+                    <div class="stats-item" data-count="98" data-suffix="%">
+                        <h3 class="text-4xl md:text-5xl font-bold mb-2 font-display font-cormorant tracking-tight counter">0</h3>
+                        <p class="text-white/80 font-medium uppercase text-xs tracking-wider">On-Time Delivery</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-main-container mt-auto">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <div class="inline-flex items-center justify-center bg-white p-4 rounded-lg shadow-md mb-4">
+                        <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto">
+                    </div>
+                    <p class="text-gray-300 mb-6 font-serif italic text-lg font-light tracking-wider md:text-left">Shipping the Future</p>
+                    <div class="flex justify-start space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><circle cx="17.5" cy="6.5" r="1.5"></circle></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Quick Links
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            Home
+                        </a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            About Us
+                        </a></li>
+                        <li><a href="products.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            Products
+                        </a></li>
+                        <li><a href="export.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            Export
+                        </a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            Contact
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Our Products
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#vitrified-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            Vitrified Tiles
+                        </a></li>
+                        <li><a href="products.html#roofing-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            Roofing Tiles
+                        </a></li>
+                        <li><a href="products.html#sanitaryware" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            Sanitaryware
+                        </a></li>
+                        <li><a href="products.html#bathroom-accessories" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            Bathroom Accessories
+                        </a></li>
+                        <li><a href="products.html#frp-manhole-cover" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-2 text-primary"><path d="m9 18 6-6-6-6"></path></svg>
+                            FRP Manhole Covers
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Contact Us
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </div>
+                            <span class="text-gray-300 group-hover:text-white transition-colors">8A National Highway, Mahendranagar, Morbi 2, Gujarat, India</span>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+                            </div>
+                            <div class="flex flex-col">
+                                <a href="tel:6351863517" class="text-gray-300 hover:text-white transition-colors">+91 63518 63517</a>
+                                <a href="tel:9104141300" class="text-gray-300 hover:text-white transition-colors">+91 91041 41300</a>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+                            </div>
+                            <a href="mailto:info@marvionexim.com" class="text-gray-300 hover:text-white transition-colors">info@marvionexim.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0 text-center">© 2025 Marvion Exim. All rights reserved.</p>
+                    <div class="flex items-center space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Counter Animation Script -->
+    <script>
+        // Counter animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateCounters = () => {
+                const counters = document.querySelectorAll('.counter');
+                const speed = 50; // The lower the faster
+                const statsItems = document.querySelectorAll('.stats-item');
+
+                const isInViewport = (el) => {
+                    const rect = el.getBoundingClientRect();
+                    return (
+                        rect.top >= 0 &&
+                        rect.left >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 1.2 &&
+                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    );
+                };
+
+                const startCounters = () => {
+                    statsItems.forEach(item => {
+                        if (isInViewport(item) && !item.classList.contains('visible')) {
+                            item.classList.add('visible');
+                            const target = item.querySelector('.counter');
+                            const count = +item.getAttribute('data-count');
+                            const suffix = item.getAttribute('data-suffix') || '';
+                            const increment = Math.max(1, Math.floor(count / speed));
+                            let current = 0;
+
+                            const updateCount = () => {
+                                if (current < count) {
+                                    current += increment;
+                                    if (current > count) current = count;
+                                    target.textContent = Math.floor(current) + suffix;
+                                    requestAnimationFrame(updateCount);
+                                } else {
+                                    target.textContent = count + suffix;
+                                }
+                            };
+
+                            updateCount();
+                        }
+                    });
+                };
+
+                // Run on load and scroll
+                window.addEventListener('load', startCounters);
+                window.addEventListener('scroll', startCounters, { passive: true });
+                
+                // Initial check
+                startCounters();
+            };
+
+            // Initialize counter animation
+            animateCounters();
+
+            // Handle scroll animations
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.animate-reveal-left, .animate-reveal-right');
+                const windowHeight = window.innerHeight;
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.classList.add('animate');
+                    }
+                });
+            };
+
+            // Initial check
+            animateOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
