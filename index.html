@@ -33,8 +33,14 @@
         
         /* Animation Keyframes */
         @keyframes revealFromRight {
-            from { clip-path: inset(0 100% 0 0); }
-            to { clip-path: inset(0 0 0 0); }
+            from { 
+                clip-path: inset(0 0 0 100%);
+                transform: scale(1.1);
+            }
+            to { 
+                clip-path: inset(0 0 0 0);
+                transform: scale(1);
+            }
         }
 
         @keyframes revealFromLeft {
@@ -917,6 +923,50 @@
 
     <!-- HERO SECTION - COMPLETE STANDALONE CODE -->
     <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        /* Smooth Reveal Animation */
+        .reveal-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .reveal-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+            transition: clip-path 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .image-loading {
+            display: none;
+            z-index: 0;
+        }
+        
+        img.loading + .image-loading {
+            display: block;
+        }
+
+        .reveal-image.visible {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
         /* HERO SECTION STYLES */
         .hero-container {
             position: relative;
@@ -937,14 +987,16 @@
             height: 100%;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             opacity: 0;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: opacity 1s ease-in-out, transform 1.2s ease-out;
             z-index: 1;
+            clip-path: inset(0 0 0 100%);
         }
-
+        
         .hero-slide.active {
             opacity: 1;
-            z-index: 2;
+            animation: revealFromRight 1.2s forwards;
         }
 
         .hero-overlay {
@@ -1644,7 +1696,11 @@
                         <div class="relative overflow-hidden rounded-lg shadow-xl h-96 lg:h-[500px] animate-reveal-right">
                             <img src="https://i.ibb.co/pj5043wC/m-3.png" 
                                  alt="Marvion Exim" 
-                                 class="w-full h-full object-cover">
+                                 class="w-full h-full object-cover"
+                                 loading="lazy"
+                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/800x500?text=Image+Not+Available'"
+                            >
+                            <div class="image-loading absolute inset-0 bg-gray-200 animate-pulse rounded-lg"></div>
                         </div>
                     </div>
                 </div>
@@ -1657,270 +1713,142 @@
                 <div class="flex flex-col lg:flex-row items-center gap-12">
                     <!-- Image Column (Left) -->
                     <!-- Video Column (Left) -->
+                    <!-- Image Column (Left) -->
                     <div class="w-full lg:w-1/2">
-                        <div class="relative overflow-hidden rounded-lg shadow-xl bg-gray-900 aspect-video group">
-                            <!-- Video Player with Reduced Opacity -->
-                            <div class="absolute top-0 left-0 w-full h-full bg-black/40">
-                                <video 
-                                    id="heroVideo"
-                                    class="w-full h-full object-cover opacity-80"
-                                    playsinline 
-                                    loop 
-                                    muted 
-                                    autoplay
-                                    preload="auto"
-                                    poster="https://res.cloudinary.com/dcqre7nop/video/upload/c_limit,h_300,w_500/cargo-port-drone.jpg"
-                                    src="https://res.cloudinary.com/dcqre7nop/video/upload/c_fill,g_center/f_auto:video/cargo-port-drone">
-                                </video>
-                            </div>
-                            
-                            <!-- Text Slideshow Container -->
-                            <div class="absolute inset-0 z-10 flex items-center justify-center p-4">
-                                <div id="textSlideshow" class="text-center text-white w-full max-w-4xl px-4">
-                                    <!-- Slides will be added by JavaScript -->
-                                </div>
-                            </div>
-                            
-                            <!-- Gradient Overlay -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+                        <div class="relative reveal-image-container">
+                            <img 
+                                src="https://res.cloudinary.com/dcqre7nop/image/upload/v1766564642/Gemini_Generated_Image_wsp5g6wsp5g6wsp5_rarht9.png" 
+                                alt="Why Choose Marvion Exim"
+                                class="reveal-image w-full h-auto rounded-lg shadow-lg"
+                                loading="lazy"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/800x500?text=Image+Not+Available'"
+                            >
+                            <div class="image-loading absolute inset-0 bg-gray-200 animate-pulse rounded-lg"></div>
                         </div>
                     </div>
                     
                     <style>
                         .slide {
                             position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%) scale(0.95);
                             display: flex;
                             flex-direction: column;
                             align-items: center;
                             justify-content: center;
                             opacity: 0;
-                            transition: opacity 0.5s ease-in-out;
                             width: 100%;
-                            height: 100%;
-                            padding: 1.5rem;
+                            padding: 1rem;
                             box-sizing: border-box;
                             text-align: center;
+                            will-change: transform, opacity;
+                            backface-visibility: hidden;
+                            -webkit-font-smoothing: antialiased;
+                            z-index: 30;
+                            pointer-events: none;
+                            transition: opacity 0.6s ease, transform 0.6s ease;
                         }
+                        
+                        .slide h3 {
+                            font-size: 1.5rem;
+                            font-weight: 700;
+                            margin: 0 0 0.75rem 0;
+                            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+                            color: #fff;
+                            line-height: 1.2;
+                            width: 100%;
+                            padding: 0 10px;
+                        }
+                        
+                        .slide p {
+                            font-size: 1rem;
+                            line-height: 1.5;
+                            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+                            color: rgba(255,255,255,0.95);
+                            max-width: 90%;
+                            margin: 0 auto;
+                            padding: 0 10px;
+                        }
+                        
+                        .slide {
+                            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                            transform: translate(-50%, -50%) scale(0.95);
+                        }
+                        
                         .slide.active {
                             opacity: 1;
+                            transform: translate(-50%, -50%) scale(1);
                         }
-                        .slide h3 {
-                            font-size: 1.8rem;
-                            font-weight: 700;
-                            margin-bottom: 1rem;
-                            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-                            letter-spacing: 0.5px;
-                            color: #fff;
+                        
+                        @media (min-width: 640px) {
+                            .slide h3 {
+                                font-size: 1.8rem;
+                                margin-bottom: 1rem;
+                            }
+                            .slide p {
+                                font-size: 1.1rem;
+                            }
                         }
-                        .slide p {
-                            font-size: 1.3rem;
-                            line-height: 1.6;
-                            text-shadow: 0 2px 6px rgba(0,0,0,0.8);
-                            color: rgba(255,255,255,0.95);
-                            max-width: 80%;
-                            margin: 0 auto;
-                        }
-                        /* Smooth transitions */
-                        .slide {
-                            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-                            transform: translateY(20px);
-                        }
-                        .slide.active {
-                            transform: translateY(0);
-                        }
+                        
                         @media (min-width: 768px) {
                             .slide h3 {
-                                font-size: 2rem;
+                                font-size: 2.2rem;
+                                margin-bottom: 1.25rem;
                             }
                             .slide p {
                                 font-size: 1.25rem;
+                                max-width: 85%;
+                            }
+                        }
+                        
+                        @media (min-width: 1024px) {
+                            .slide h3 {
+                                font-size: 2.5rem;
+                            }
+                            .slide p {
+                                font-size: 1.4rem;
                             }
                         }
                     </style>
                     
                     <script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            const slides = [
-                                {
-                                    title: "Your Global Freight & Logistics Partner",
-                                    text: "Seamless import/export solutions across continents"
-                                },
-                                {
-                                    title: "Worldwide Shipping Expertise",
-                                    text: "Navigating global trade regulations with precision"
-                                },
-                                {
-                                    title: "End-to-End Supply Chain",
-                                    text: "From origin to destination, we handle it all"
-                                },
-                                {
-                                    title: "Customs & Compliance",
-                                    text: "Expert handling of all documentation and regulations"
-                                },
-                                {
-                                    title: "24/7 Cargo Tracking",
-                                    text: "Real-time updates for your peace of mind"
-                                }
-                            ];
-                            
-                            const slideshow = document.getElementById('textSlideshow');
-                            let currentSlide = 0;
-                            let isAnimating = false;
-                            
-                            // Create slides
-                            slides.forEach((slide, index) => {
-                                const slideDiv = document.createElement('div');
-                                slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
-                                slideDiv.innerHTML = `
-                                    <h3 class="text-2xl md:text-4xl font-bold mb-4">${slide.title}</h3>
-                                    <p class="text-sm md:text-lg">${slide.text}</p>
-                                `;
-                                slideshow.appendChild(slideDiv);
-                            });
-                            
-                            const slideElements = document.querySelectorAll('.slide');
-                            
-                            function updateSlides() {
-                                if (isAnimating) return;
-                                isAnimating = true;
-                                
-                                // Fade out current slide
-                                const currentActive = document.querySelector('.slide.active');
-                                if (currentActive) {
-                                    currentActive.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                                    currentActive.style.opacity = '0';
-                                    currentActive.style.transform = 'translateY(-20px)';
-                                }
-                                
-                                // After fade out, update classes and fade in new slide
-                                setTimeout(() => {
-                                    slideElements.forEach((slide, index) => {
-                                        if (index === currentSlide) {
-                                            slide.classList.add('active');
-                                            slide.style.opacity = '0';
-                                            slide.style.transform = 'translateY(20px)';
-                                            // Force reflow
-                                            void slide.offsetWidth;
-                                            slide.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                                            slide.style.opacity = '1';
-                                            slide.style.transform = 'translateY(0)';
-                                        } else {
-                                            slide.classList.remove('active');
-                                            slide.style.opacity = '0';
-                                            slide.style.transform = 'translateY(20px)';
-                                        }
-                                    });
-                                    
-                                    isAnimating = false;
-                                }, 500); // Match this with the transition duration
-                            }
-                            
-                            function nextSlide() {
-                                currentSlide = (currentSlide + 1) % slides.length;
-                                updateSlides();
-                            }
-                            
-                            function goToSlide(index) {
-                                currentSlide = index;
-                                updateSlides();
-                                // Reset the timer when manually changing slides
-                                clearInterval(slideInterval);
-                                slideInterval = setInterval(nextSlide, 5000);
-                            }
-                            
-                            // Auto-advance slides every 5 seconds
-                            let slideInterval = setInterval(() => {
-                                if (!isAnimating) {
-                                    nextSlide();
-                                }
-                            }, 4000);
-                            
-                            // Pause on hover
-                            const videoContainer = document.querySelector('.group');
-                            let isHovered = false;
-                            
-                            videoContainer.addEventListener('mouseenter', () => {
-                                isHovered = true;
-                                clearInterval(slideInterval);
-                            });
-                            
-                            videoContainer.addEventListener('mouseleave', () => {
-                                isHovered = false;
-                                clearInterval(slideInterval);
-                                if (!isAnimating) {
-                                    slideInterval = setInterval(() => {
-                                        if (!isHovered) nextSlide();
-                                    }, 4000);
-                                }
-                            });
-                            
-                            // Touch support for mobile
-                            let touchStartX = 0;
-                            let touchEndX = 0;
-                            let touchStartTime = 0;
-                            
-                            videoContainer.addEventListener('touchstart', (e) => {
-                                touchStartX = e.changedTouches[0].screenX;
-                                touchStartTime = Date.now();
-                            }, { passive: true });
-                            
-                            videoContainer.addEventListener('touchend', (e) => {
-                                touchEndX = e.changedTouches[0].screenX;
-                                const touchTime = Date.now() - touchStartTime;
-                                
-                                // Only handle quick swipes
-                                if (touchTime < 300) {
-                                    const diff = touchStartX - touchEndX;
-                                    if (Math.abs(diff) > 50) { // Minimum swipe distance
-                                        if (diff > 0) {
-                                            nextSlide();
-                                        } else {
-                                            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                                            updateSlides();
-                                        }
-                                    }
-                                }
-                            }, { passive: true });
                         });
                     </script>
                     <!-- Content Column (Right) -->
                     <div class="w-full lg:w-1/2">
-                        <div>
-                            <span class="text-primary font-medium tracking-widest text-sm uppercase">Why Choose Us</span>
-                            <h2 class="text-5xl md:text-6xl font-display font-light text-gray-900 mt-4 mb-8">
-                                <span>Exceptional Import & Export</span>
-                            </h2>
-                            <p class="text-gray-600 leading-relaxed mb-8 text-lg">
-                                At Marvion Exim, we distinguish ourselves through unwavering commitment to excellence and meticulous operational precision. Our bespoke import and export solutions navigate the complexities of international commerce with unparalleled sophistication. We leverage decades of industry expertise to ensure every transaction reflects our hallmark standards of professionalism, integrity, and exquisite business acumen.
-                            </p>
-                        </div>
-
-                        <div class="space-y-5 mb-8 animate-slide-from-right" style="animation-delay: 0.4s;">
-                            <div class="flex items-start space-x-4">
-                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
-                                <div>
-                                    <h3 class="font-medium text-gray-900 font-display text-xl">Uncompromising Quality</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Rigorous protocols ensuring every product meets exacting international specifications</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start space-x-4">
-                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
-                                <div>
-                                    <h3 class="font-medium text-gray-900 font-display text-xl">Strategic Global Partnerships</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Cultivated relationships across continents providing unparalleled market access</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start space-x-4">
-                                <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
-                                <div>
-                                    <h3 class="font-medium text-gray-900 font-display text-xl">Bespoke Logistics Solutions</h3>
-                                    <p class="text-gray-600 text-sm mt-1">Sophisticated supply chain with real-time transparency and white-glove handling</p>
+                            <div class="animate-slide-from-right" style="animation-delay: 0.2s;">
+                                <span class="text-primary font-medium tracking-widest text-sm uppercase">Why Choose Us</span>
+                                <h2 class="text-5xl md:text-6xl font-display font-light text-gray-900 mt-4 mb-8">
+                                    <span class="animate-slide-from-right" style="display: inline-block; animation-delay: 0.3s;">Exceptional Import &amp; Export</span>
+                                </h2>
+                                <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                                    At Marvion Exim, we distinguish ourselves through unwavering commitment to excellence and meticulous operational precision. Our bespoke import and export solutions navigate the complexities of international commerce with unparalleled sophistication. We leverage decades of industry expertise to ensure every transaction reflects our hallmark standards of professionalism, integrity, and exquisite business acumen.
+                                </p>
+                                
+                                <div class="space-y-5 mt-8">
+                                    <div class="flex items-start space-x-4">
+                                        <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900 font-display text-xl">Uncompromising Quality</h3>
+                                            <p class="text-gray-600 text-sm mt-1">Rigorous protocols ensuring every product meets exacting international specifications</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-4">
+                                        <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900 font-display text-xl">Strategic Global Partnerships</h3>
+                                            <p class="text-gray-600 text-sm mt-1">Cultivated relationships across continents providing unparalleled market access</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start space-x-4">
+                                        <div class="text-primary mt-1 text-xl font-bold flex-shrink-0">✓</div>
+                                        <div>
+                                            <h3 class="font-medium text-gray-900 font-display text-xl">Bespoke Logistics Solutions</h3>
+                                            <p class="text-gray-600 text-sm mt-1">Sophisticated supply chain with real-time transparency and white-glove handling</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1932,6 +1860,124 @@
             <div class="absolute -left-20 -top-20 w-64 h-64 bg-primary/5 rounded-full filter blur-3xl"></div>
             <div class="absolute -right-20 -bottom-20 w-40 h-40 bg-primary/10 rounded-full filter blur-3xl"></div>
         </section>
+        
+        <!-- Video Hero Section -->
+        <section class="relative h-[70vh] min-h-[500px] w-full overflow-hidden bg-gray-900">
+            <video 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                class="absolute inset-0 w-full h-full object-cover"
+                preload="auto"
+                poster="https://res.cloudinary.com/dcqre7nop/image/upload/v1766564642/Gemini_Generated_Image_wsp5g6wsp5g6wsp5_rarht9.png"
+            >
+                <source src="https://res.cloudinary.com/dcqre7nop/video/upload/v1766468898/cargo-port-drone.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            
+            <!-- Dark overlay for better text contrast -->
+            <div class="absolute inset-0 bg-black/40"></div>
+            
+       <!-- Content -->
+<div class="relative h-full flex items-center">
+    <div class="container mx-auto px-4 text-center text-white">
+        <div class="relative">
+            <h2 class="text-4xl md:text-6xl font-display font-light mb-6 min-h-[4.5rem] md:min-h-[5.5rem]">
+                <span id="sliding-text" class="opacity-100 transition-opacity duration-1000">Global Trade Solutions</span>
+            </h2>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 min-h-[3rem]">
+                <span id="sliding-subtext" class="opacity-100 transition-opacity duration-1000">Connecting markets, delivering excellence across borders</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textElement = document.getElementById('sliding-text');
+        const subtextElement = document.getElementById('sliding-subtext');
+        
+        const messages = [
+            {
+                text: "Marvion Exim",
+                subtext: "Your trusted global trade partner since 2010"
+            },
+            {
+                text: "Import & Export",
+                subtext: "Seamless cross-border trade solutions"
+            },
+            {
+                text: "Global Logistics",
+                subtext: "Connecting markets worldwide with precision"
+            },
+            {
+                text: "Supply Chain",
+                subtext: "End-to-end supply chain management"
+            },
+            {
+                text: "Customs Clearance",
+                subtext: "Efficient and compliant customs solutions"
+            },
+            {
+                text: "Cargo Shipping",
+                subtext: "Safe and timely delivery of your goods"
+            },
+            {
+                text: "Trade Compliance",
+                subtext: "Navigating regulations for you"
+            },
+            {
+                text: "Warehousing",
+                subtext: "Secure storage and distribution"
+            },
+            {
+                text: "Freight Forwarding",
+                subtext: "Optimized routes, reduced costs"
+            },
+            {
+                text: "International Trade",
+                subtext: "Expanding your global reach"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function updateText() {
+            // Fade out
+            textElement.style.opacity = '0';
+            subtextElement.style.opacity = '0';
+            
+            // Update text content after fade out
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % messages.length;
+                textElement.textContent = messages[currentIndex].text;
+                subtextElement.textContent = messages[currentIndex].subtext;
+                
+                // Fade in
+                setTimeout(() => {
+                    textElement.style.opacity = '1';
+                    subtextElement.style.opacity = '1';
+                }, 50);
+            }, 1000); // Match this with the transition duration
+        }
+
+        // Change text every 4 seconds
+        setInterval(updateText, 4000);
+        
+        // Optional: Pause on hover
+        const heroSection = document.querySelector('.relative.h-full.flex.items-center');
+        let slideInterval = setInterval(updateText, 4000);
+        
+        heroSection.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        heroSection.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(updateText, 4000);
+        });
+    });
+</script>
                                 
     </main>
 
@@ -2375,7 +2421,7 @@
                         </li>
                         <li class="flex items-center gap-3 group">
                             <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 text-primary"><path d="M22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
                             </div>
                             <a href="mailto:info@marvionexim.com" class="text-gray-300 hover:text-white transition-colors">info@marvionexim.com</a>
                         </li>
@@ -2384,7 +2430,7 @@
             </div>
             <div class="border-t border-gray-800 pt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm mb-4 md:mb-0 text-center">© 2025 Marvion Exim. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0 text-center"> 2025 Marvion Exim. All rights reserved.</p>
                     <div class="flex items-center space-x-6">
                         <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Privacy Policy</a>
                         <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Terms of Service</a>
@@ -2470,7 +2516,53 @@
             
             // Check on scroll
             window.addEventListener('scroll', animateOnScroll);
-        });
-    </script>
-</body>
-</html>
+
+            // Image loading and reveal on scroll
+        const images = document.querySelectorAll('.reveal-image, .object-cover');
+        
+        function checkIfInView() {
+            images.forEach(image => {
+                const rect = image.getBoundingClientRect();
+                const isVisible = (
+                    rect.top <= (window.innerHeight * 0.85) &&
+                    rect.bottom >= 0
+                );
+
+                if (isVisible) {
+                    // Handle reveal animation for reveal-image
+                    if (image.classList.contains('reveal-image')) {
+                        image.style.transitionDelay = '0.3s';
+                        image.classList.add('visible');
+                    }
+                    
+                    // Handle loading state
+                    if (!image.complete) {
+                        image.classList.add('loading');
+                        const loader = image.nextElementSibling;
+                        if (loader && loader.classList.contains('image-loading')) {
+                            loader.style.display = 'block';
+                        }
+                        
+                        image.onload = function() {
+                            this.classList.remove('loading');
+                            const loader = this.nextElementSibling;
+                            if (loader && loader.classList.contains('image-loading')) {
+                                loader.style.display = 'none';
+                            }
+                        };
+                    }
+                }
+            });
+        }    // Check on scroll
+            window.addEventListener('scroll', checkIfInView);
+            
+            // Preload the video
+            const video = document.querySelector('video[autoplay]');
+            if (video) {
+                video.preload = 'auto';
+                video.load();
+            }
+            });
+        </script>
+    </body>
+    </html>
