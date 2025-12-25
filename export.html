@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export - Marvion Exim</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(33, 29%, 58%)',
+                        secondary: 'hsl(210, 40%, 96.1%)',
+                        background: 'hsl(0, 0%, 100%)',
+                        foreground: 'hsl(222, 47%, 11%)',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Cormorant Garamond', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .font-display { font-family: 'Cormorant Garamond', serif; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-zoom-in {
+            animation: zoomIn 0.8s ease-out forwards;
+        }
+        
+        /* Scroll Animation Classes */
+        [data-animate] {
+            opacity: 0;
+        }
+        
+        [data-animate].animated {
+            opacity: 1;
+        }
+        
+        /* Hover Effects */
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- HEADER -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100 py-4">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto object-contain">
+            </a>
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium text-primary uppercase tracking-wide transition-colors hover:text-primary">Home</a>
+                <a href="about.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">About</a>
+                <a href="products.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Products</a>
+                <a href="export.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Export</a>
+                <a href="catalogues.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Catalogues</a>
+                <a href="information.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Information</a>
+                <a href="contact.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Get In Touch</a>
+            </nav>
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="contact.html" class="hidden xl:flex items-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                    Reach To Us <i data-lucide="map-pin" class="h-4 w-4"></i>
+                </a>
+            </div>
+            <button class="lg:hidden p-2" onclick="document.getElementById('mobile-menu').classList.toggle('translate-x-full')">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-[300px] bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-[60] p-6 flex flex-col gap-6">
+        <div class="flex justify-between items-center">
+            <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-12 w-auto object-contain">
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('translate-x-full')">
+                <i data-lucide="x" class="h-6 w-6"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-4">
+            <a href="index.html" class="text-lg font-medium text-primary border-b border-primary pb-2">Home</a>
+            <a href="about.html" class="text-lg font-medium text-gray-800 border-b border-gray-100 pb-2 hover:text-primary">About</a>
+            <a href="products.html" class="text-lg font-medium text-gray-800 border-b border-gray-100 pb-2 hover:text-primary">Products</a>
+            <a href="export.html" class="text-lg font-medium text-gray-800 border-b border-gray-100 pb-2 hover:text-primary">Export</a>
+            <a href="catalogues.html" class="text-lg font-medium text-gray-800 border-b border-gray-100 pb-2 hover:text-primary">Catalogues</a>
+            <a href="information.html" class="text-lg font-medium text-gray-800 border-b border-gray-100 pb-2 hover:text-primary">Information</a>
+            <a href="contact.html" class="text-lg font-medium text-gray-800 border-b border-gray-100 pb-2 hover:text-primary">Get In Touch</a>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+        <!-- Hero Slider Section -->
+        <section class="relative h-screen min-h-[600px] w-full overflow-hidden bg-gray-900 group">
+            <!-- Slide 1: Fish Protein Powder -->
+            <div class="absolute inset-0 transition-opacity duration-1000 opacity-100 slide">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105" style="background-image: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                </div>
+                <div class="container mx-auto h-full flex items-center px-4 relative z-10">
+                    <div class="max-w-3xl text-center mx-auto">
+                        <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">Premium Fish Protein Powder</h1>
+                        <p class="text-xl text-gray-200 mb-8">High-quality, food-grade protein powder sourced from the finest marine sources. Rich in essential amino acids and nutrients for optimal health benefits.</p>
+                        <a href="#contact" class="inline-block bg-primary text-white px-8 py-3 rounded-sm font-medium hover:bg-opacity-90 transition-all duration-300">Request Quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Tiles & Sanitaryware -->
+            <div class="absolute inset-0 transition-opacity duration-1000 opacity-0 slide">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                </div>
+                <div class="container mx-auto h-full flex items-center px-4 relative z-10">
+                    <div class="max-w-3xl text-center mx-auto">
+                        <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">Premium Tiles & Sanitaryware</h1>
+                        <p class="text-xl text-gray-200 mb-8">Discover our exquisite collection of vitrified tiles, roofing tiles, and premium sanitaryware that combine elegance with durability for modern living spaces.</p>
+                        <a href="#catalogues" class="inline-block bg-primary text-white px-8 py-3 rounded-sm font-medium hover:bg-opacity-90 transition-all duration-300">View Collection</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Building Materials -->
+            <div class="absolute inset-0 transition-opacity duration-1000 opacity-0 slide">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                </div>
+                <div class="container mx-auto h-full flex items-center px-4 relative z-10">
+                    <div class="max-w-3xl text-center mx-auto">
+                        <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">Premium Building Solutions</h1>
+                        <p class="text-xl text-gray-200 mb-8">Innovative construction materials including FRP manhole covers, louvers panels, and aluminum composite panels for modern architectural needs.</p>
+                        <a href="#contact" class="inline-block bg-primary text-white px-8 py-3 rounded-sm font-medium hover:bg-opacity-90 transition-all duration-300">Inquire Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Packaging Solutions -->
+            <div class="absolute inset-0 transition-opacity duration-1000 opacity-0 slide">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                </div>
+                <div class="container mx-auto h-full flex items-center px-4 relative z-10">
+                    <div class="max-w-3xl text-center mx-auto">
+                        <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">Eco-friendly Packaging</h1>
+                        <p class="text-xl text-gray-200 mb-8">Sustainable packaging solutions including woven polypropylene bulk bags and disposable tableware that combine functionality with environmental responsibility.</p>
+                        <a href="#samples" class="inline-block bg-primary text-white px-8 py-3 rounded-sm font-medium hover:bg-opacity-90 transition-all duration-300">Request Samples</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Indian Exports -->
+            <div class="absolute inset-0 transition-opacity duration-1000 opacity-0 slide">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105" style="background-image: url('https://images.unsplash.com/photo-1542838132-92d533f92e0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                </div>
+                <div class="container mx-auto h-full flex items-center px-4 relative z-10">
+                    <div class="max-w-3xl text-center mx-auto">
+                        <h1 class="text-4xl md:text-6xl font-display font-bold text-white mb-6">India's Finest Exports</h1>
+                        <p class="text-xl text-gray-200 mb-8">Premium quality Indian rice, aromatic spices, and exquisite handicraft products, showcasing the rich heritage and diversity of Indian craftsmanship.</p>
+                        <a href="#catalogues" class="inline-block bg-primary text-white px-8 py-3 rounded-sm font-medium hover:bg-opacity-90 transition-all duration-300">Explore Products</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <button class="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all duration-300 hidden group-hover:block" onclick="prevSlide()">
+                <i data-lucide="chevron-left" class="h-8 w-8"></i>
+            </button>
+            <button class="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all duration-300 hidden group-hover:block" onclick="nextSlide()">
+                <i data-lucide="chevron-right" class="h-8 w-8"></i>
+            </button>
+        </section>
+
+        <section class="py-20 bg-gray-50 overflow-hidden" id="catalogues">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center mb-16" data-animate>
+                    <div class="animate-slide-up">
+                        <span class="text-primary font-bold tracking-widest uppercase text-sm block mb-4" style="animation-delay: 0.1s">Global Reach</span>
+                        <h1 class="text-5xl font-display font-bold text-gray-900 mb-6" style="animation-delay: 0.2s">Exporting Excellence</h1>
+                        <p class="text-gray-600 leading-relaxed text-lg" style="animation-delay: 0.3s">
+                            Marvion Exim connects the world with premium Indian ceramics. Our robust logistics network ensures timely delivery to over 25 countries.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- Left Column -->
+                    <div data-animate class="animate-slide-left" style="animation-delay: 0.4s">
+                         <h2 class="text-3xl font-display font-bold mb-6">Our Global Footprint</h2>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            We have successfully established a strong presence in key markets including the USA, Europe, Middle East, and Africa. Our export division is dedicated to understanding specific market requirements and delivering accordingly.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white p-6 rounded shadow-sm hover-scale" style="transition-delay: 0.1s">
+                                <h3 class="font-bold text-3xl text-primary mb-2">25+</h3>
+                                <p class="text-gray-600 text-sm uppercase">Countries</p>
+                            </div>
+                            <div class="bg-white p-6 rounded shadow-sm hover-scale" style="transition-delay: 0.1s">
+                                <h3 class="font-bold text-3xl text-primary mb-2">100%</h3>
+                                <p class="text-gray-600 text-sm uppercase">On-Time Delivery</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="bg-white p-8 rounded shadow-lg hover-scale" data-animate style="animation-delay: 0.5s">
+                        <h3 class="text-xl font-bold mb-4">Export Inquiry</h3>
+                        <form class="space-y-4">
+                            <input type="text" placeholder="Company Name" class="w-full p-3 border border-gray-200 rounded">
+                            <input type="email" placeholder="Email Address" class="w-full p-3 border border-gray-200 rounded">
+                            <select class="w-full p-3 border border-gray-200 rounded text-gray-600">
+                                <option>Select Region</option>
+                                <option>North America</option>
+                                <option>Europe</option>
+                                <option>Middle East</option>
+                                <option>Asia Pacific</option>
+                            </select>
+                            <textarea placeholder="Requirement Details" rows="4" class="w-full p-3 border border-gray-200 rounded"></textarea>
+                            <button class="bg-primary hover:bg-primary/90 text-white px-6 py-3 w-full font-bold uppercase tracking-wider text-sm transition-colors">
+                                Submit Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Slideshow functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.style.opacity = '0';
+                    slide.style.zIndex = '1';
+                });
+                
+                // Show the current slide
+                slides[index].style.opacity = '1';
+                slides[index].style.zIndex = '2';
+                
+                currentSlide = index;
+            }
+
+            // Function to show next slide
+            window.nextSlide = function() {
+                const nextSlide = (currentSlide + 1) % totalSlides;
+                showSlide(nextSlide);
+            };
+
+            // Function to show previous slide
+            window.prevSlide = function() {
+                const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prevSlide);
+            };
+
+            // Auto-advance slides every 5 seconds
+            setInterval(nextSlide, 5000);
+
+            // Initialize first slide
+            showSlide(0);
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+    </script>
+
+    <!-- FOOTER -->
+    <div class="footer-main-container" style="background-color: rgb(26, 26, 26);">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <div class="inline-flex items-center justify-center bg-white p-4 rounded-lg shadow-md mb-4">
+                        <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto">
+                    </div>
+                    <p class="text-gray-300 mb-6 font-serif italic text-lg font-light tracking-wider">Shipping the Future</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i data-lucide="linkedin" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Quick Links
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Home
+                        </a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            About Us
+                        </a></li>
+                        <li><a href="products.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Products
+                        </a></li>
+                        <li><a href="export.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Export
+                        </a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Contact
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Our Products
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#vitrified-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Vitrified Tiles
+                        </a></li>
+                        <li><a href="products.html#roofing-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Roofing Tiles
+                        </a></li>
+                        <li><a href="products.html#sanitaryware" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Sanitaryware
+                        </a></li>
+                        <li><a href="products.html#bathroom-accessories" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Bathroom Accessories
+                        </a></li>
+                        <li><a href="products.html#frp-manhole-cover" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            FRP Manhole Covers
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Contact Us
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="map-pin" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <span class="text-gray-300 group-hover:text-white transition-colors">8A National Highway, Mahendranagar, Morbi 2, Gujarat, India</span>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="phone" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <a href="tel:6351863517" class="text-gray-300 hover:text-white transition-colors">+91 63518 63517</a>
+                                <a href="tel:9104141300" class="text-gray-300 hover:text-white transition-colors">+91 91041 41300</a>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="mail" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <a href="mailto:info@marvionexim.com" class="text-gray-300 hover:text-white transition-colors">info@marvionexim.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0 text-center">© 2025 Marvion Exim. All rights reserved.</p>
+                    <div class="flex items-center space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    <script>
+        // Intersection Observer for scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide Icons
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            // Set up intersection observer for scroll animations
+            const animateElements = document.querySelectorAll('[data-animate]');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        // Optional: Unobserve after animation
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Observe all elements with data-animate attribute
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Add hover effect to all cards
+            document.querySelectorAll('.bg-white').forEach(card => {
+                if (!card.closest('.slide')) { // Don't add to slider cards
+                    card.classList.add('transition-all', 'duration-300', 'hover:shadow-lg');
+                }
+            });
+        });
+    </script>
+</html>

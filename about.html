@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Marvion Exim</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(33, 29%, 58%)',
+                        secondary: 'hsl(210, 40%, 96.1%)',
+                        background: 'hsl(0, 0%, 100%)',
+                        foreground: 'hsl(222, 47%, 11%)',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Cormorant Garamond', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .font-display { font-family: 'Cormorant Garamond', serif; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        .slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
+        .slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
+        .zoom-in { animation: zoomIn 0.8s ease-out forwards; }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        
+        /* Counter animation */
+        .counter {
+            display: inline-block;
+            min-width: 2em;
+            text-align: center;
+        }
+        
+        /* Scroll Animation Classes */
+        [data-animate].animate-visible {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            transform: translateY(0) !important;
+        }
+        
+        [data-animate] h1,
+        [data-animate] h2,
+        [data-animate] h3,
+        [data-animate] h4,
+        [data-animate] h5,
+        [data-animate] h6,
+        [data-animate] p,
+        [data-animate] li,
+        [data-animate] .btn {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        [data-animate].animate-visible h1,
+        [data-animate].animate-visible h2,
+        [data-animate].animate-visible h3,
+        [data-animate].animate-visible h4,
+        [data-animate].animate-visible h5,
+        [data-animate].animate-visible h6,
+        [data-animate].animate-visible p,
+        [data-animate].animate-visible li,
+        [data-animate].animate-visible .btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Animation Delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        /* Animation for cards */
+        .card-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .card-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Directors' Messages Styles */
+        .directors-hero {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        
+        .elegant-line {
+            position: absolute;
+            background: #e5e7eb;
+            z-index: 0;
+        }
+        
+        .line-1 {
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 100%;
+            transform: translateX(50px);
+        }
+        
+        .line-2 {
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            transform: translateX(-50px);
+        }
+        
+        .line-3 {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            transform: translateY(80px);
+        }
+        
+        .line-4 {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            transform: translateY(-80px);
+        }
+        
+        .quote-slide {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+            z-index: 1;
+        }
+        
+        .quote-slide.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            line-height: 1.4;
+            color: #1f2937;
+            margin-bottom: 40px;
+            font-weight: 400;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .quote-text::before,
+        .quote-text::after {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: #d1d5db;
+            position: absolute;
+            line-height: 1;
+            opacity: 0.3;
+        }
+        
+        .quote-text::before {
+            top: -20px;
+            left: -10px;
+        }
+        
+        .quote-text::after {
+            bottom: -40px;
+            right: -10px;
+        }
+        
+        .author-section {
+            margin-top: 50px;
+        }
+        
+        .director-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        
+        .director-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        
+        .company-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #9ca3af;
+            font-style: italic;
+        }
+        
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #e5e7eb;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .progress-container.active {
+            opacity: 1;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: #111827;
+            transition: width 6s linear;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .quote-text {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .directors-hero {
+                padding: 60px 20px;
+            }
+            
+            .quote-text {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+            }
+            
+            .quote-text::before,
+            .quote-text::after {
+                font-size: 4rem;
+            }
+            
+            .quote-text::before {
+                top: -15px;
+                left: -5px;
+            }
+            
+            .quote-text::after {
+                bottom: -30px;
+                right: -5px;
+            }
+            
+            .author-section {
+                margin-top: 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .directors-hero {
+                padding: 40px 15px;
+            }
+            
+            .quote-text {
+                font-size: 1.3rem;
+                padding: 0 10px;
+            }
+            
+            .quote-text::before,
+            .quote-text::after {
+                font-size: 3rem;
+            }
+            
+            .director-name {
+                font-size: 1.3rem;
+            }
+        }
+        
+        footer {
+            background-color: rgb(26, 26, 26);
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --accent: hsl(33, 29%, 58%);
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+        }
+        
+        .section-header {
+            margin-bottom: 60px;
+            padding: 0 20px;
+        }
+
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Product Carousel Styles */
+        .about-products { font-family: 'Inter', sans-serif; padding: 80px 0; overflow-x: hidden; }
+        .carousel-wrapper { overflow: hidden; padding: 40px 0; }
+        .carousel-track { display: flex; gap: 32px; animation: scroll 60s linear infinite; width: max-content; padding: 0 40px; }
+        .carousel-track:hover { animation-play-state: paused; }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .product-card { position: relative; width: 340px; height: 440px; border-radius: 20px; overflow: hidden; cursor: pointer; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,.12); transition: .4s; }
+        .product-card:hover { transform: translateY(-10px) scale(1.03); }
+        .product-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .product-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.95)); }
+        .product-content { position: absolute; bottom: 0; padding: 28px; color: #fff; }
+        .product-badge { position: absolute; top: 20px; left: 20px; background: #fff; color: var(--primary); padding: 6px 14px; border-radius: 20px; font-size: .7rem; font-weight: 700; }
+        .product-number { position: absolute; top: 20px; right: 20px; color: #fff; font-weight: 700; }
+        .product-content h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 8px; }
+        .product-content p { font-size: 0.9rem; opacity: 0.9; }
+    </style>
+
+        @media (max-width: 768px) {
+            .carousel-track {
+                padding: 0 20px;
+                gap: 24px;
+            }
+
+            .product-card {
+                width: 300px;
+                height: 400px;
+            }
+
+            .product-name {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+    <!-- HEADER -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100 py-4">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto object-contain">
+            </a>
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium text-primary uppercase tracking-wide transition-colors hover:text-primary">Home</a>
+                <a href="about.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">About</a>
+                <a href="products.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Products</a>
+                <a href="export.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Export</a>
+                <a href="catalogues.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Catalogues</a>
+                <a href="information.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Information</a>
+                <a href="contact.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Get In Touch</a>
+            </nav>
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="contact.html" class="hidden xl:flex items-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                    Reach To Us <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" class="lucide lucide-map-pin h-4 w-4"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </a>
+            </div>
+            <button class="lg:hidden p-2" onclick="document.getElementById('mobile-menu').classList.toggle('translate-x-full')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" class="lucide lucide-menu h-6 w-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="lg:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50" id="mobile-menu">
+            <div class="flex flex-col h-full p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-12 w-auto">
+                    <button onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-6 w-6"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    </button>
+                </div>
+                <nav class="flex-1 flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Home</a>
+                    <a href="about.html" class="text-primary hover:text-primary transition-colors py-2 border-b border-gray-100">About</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Products</a>
+                    <a href="export.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Export</a>
+                    <a href="catalogues.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Catalogues</a>
+                    <a href="information.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Information</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Get In Touch</a>
+                </nav>
+                <div class="pt-4 mt-auto">
+                    <a href="contact.html" class="w-full flex items-center justify-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                        Reach To Us <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Add padding to account for fixed header -->
+    <div class="pt-24"></div>
+
+    <!-- Hero Section with Animation -->
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <section class="relative py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        <!-- Background Image with 10% opacity -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1562892302-97faedd66f1c?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] opacity-[0.05] bg-cover bg-center"></div>
+            <!-- Pattern Overlay -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDQ1KSI+PHJlY3Qgd2lkdGg9IjUwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJyZ2JhKDEzNywxMTAsNjYsMC4wNSkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=')] opacity-10"></div>
+            <!-- Animated circles -->
+            <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-primary/5 animate-pulse"></div>
+            <div class="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-primary/5 animate-pulse delay-1000"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-5xl mx-auto text-center">
+                <span class="inline-block text-primary font-bold tracking-widest text-sm mb-4 animate-fadeIn">YOUR GLOBAL TRADE PARTNER</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6 leading-tight fade-in delay-100">
+                    Global Trade & <span class="text-primary">Manufacturing</span> Excellence
+                </h1>
+                <div class="w-24 h-1 bg-primary mx-auto mb-8 fade-in delay-150"></div>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed fade-in delay-200">
+                    As a leading international trading and manufacturing company, Marvion Exim specializes in sourcing, producing, and distributing high-quality products to global markets. With a presence in 25 countries, we connect manufacturers with international buyers through our extensive network and expertise in global trade.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-20 bg-white overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative slide-in-left">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Marvion Exim Facility" 
+                         class="w-full rounded-lg shadow-xl hover-scale">
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/10 -z-10"></div>
+                </div>
+                <div class="fade-in delay-100 stats-container">
+                    <span class="text-primary font-bold tracking-widest text-sm">OUR STORY</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-6">Bridging Global Markets Through Trade</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Since our establishment, Marvion Exim has evolved into a comprehensive trading and manufacturing partner, specializing in international trade solutions. Our expertise spans across multiple industries, with a strong focus on quality manufacturing and efficient export-import operations.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Our global presence in 25+ countries has been built on the foundation of trust, reliability, and excellence in international trade. We've developed a robust supply chain network that ensures timely delivery and competitive pricing for our partners worldwide.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-50 rounded-lg hover:shadow-md transition-shadow duration-300">
+                            <div class="text-3xl font-display font-bold text-primary mb-2">
+                                <span class="counter" data-target="25">0</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Countries Served</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg hover:shadow-md transition-shadow duration-300">
+                            <div class="text-3xl font-display font-bold text-primary mb-2">
+                                <span class="counter" data-target="500">0</span>
+                            </div>
+                            <p class="text-sm text-gray-600">Projects Completed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="slide-in-right">
+                    <span class="text-primary font-bold tracking-widest text-sm">OUR VALUES</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-6">Excellence in Global Trade & Manufacturing</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        At Marvion Exim, we are driven by a set of core values that define who we are and how we conduct business. Our commitment to excellence, integrity, and innovation is the foundation of our success in the global marketplace.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Integrity:</strong> We conduct business with honesty, transparency, and ethical practices in all our dealings.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Quality:</strong> We are committed to delivering products and services that meet the highest industry standards.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Innovation:</strong> We embrace new technologies and innovative approaches to stay ahead in the global market.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Sustainability:</strong> We are committed to environmentally responsible practices in all aspects of our operations.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative fade-in">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Global Trade Network" 
+                         class="w-full rounded-lg shadow-xl hover-scale">
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Quality Section -->
+    <section class="py-20 bg-white overflow-hidden">
+        <div class="container mx-auto px-4">
+            <!-- Title Section (visible on mobile) -->
+            <div class="md:hidden mb-8 text-center">
+                <span class="text-primary font-bold tracking-widest text-sm">OUR QUALITY</span>
+                <h2 class="text-3xl font-display font-bold text-gray-900 mt-2 mb-6">Commitment to Excellence in Every Product</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative slide-in-left order-2 md:order-1">
+                    <img src="https://images.unsplash.com/photo-1717386255773-1e3037c81788?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                         alt="Quality Manufacturing" 
+                         class="w-full rounded-lg shadow-xl hover-scale object-cover h-full">
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/10 -z-10"></div>
+                </div>
+                <div class="slide-in-right order-1 md:order-2">
+                    <!-- Title Section (hidden on mobile, shown on md and up) -->
+                    <div class="hidden md:block">
+                        <span class="text-primary font-bold tracking-widest text-sm">OUR QUALITY</span>
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-6">Commitment to Excellence in Every Product</h2>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        At Marvion Exim, quality isn't just a standard—it's our promise. We implement rigorous quality control measures at every stage of production to ensure our products meet the highest international standards and exceed customer expectations.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Stringent Testing:</strong> Every product undergoes comprehensive testing to ensure durability, safety, and performance.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Certified Materials:</strong> We source only premium, certified materials from trusted suppliers.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Skilled Craftsmanship:</strong> Our experienced team ensures precision and attention to detail in every product.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Continuous Improvement:</strong> We constantly refine our processes to enhance quality and efficiency.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global's Role in International Trade -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in order-2 md:order-1">
+                    <span class="text-primary font-bold tracking-widest text-sm">GLOBAL REACH</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mt-2 mb-6">Our Role in Shaping Global Trade</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        In today's interconnected world, Marvion Exim plays a pivotal role in international trade, connecting markets and creating opportunities across borders. Our global network and expertise enable us to navigate the complexities of international commerce with precision and efficiency.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Market Connectivity:</strong> Bridging the gap between manufacturers and international markets through our extensive global network.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Trade Facilitation:</strong> Streamlining import-export processes and ensuring compliance with international trade regulations.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Supply Chain Excellence:</strong> Optimizing logistics and distribution networks for efficient global trade operations.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="text-gray-600"><strong>Cultural Intelligence:</strong> Leveraging deep market insights and cultural understanding to facilitate successful international partnerships.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative fade-in order-1 md:order-2">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Global Trade Network" 
+                         class="w-full rounded-lg shadow-xl hover-scale">
+                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Carousel Section -->
+    <section class="about-products py-20 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="section-header text-center">
+                <h2 class="mx-auto">Our Product Collection</h2>
+                <p class="mx-auto">Discover our premium range of products across diverse industries</p>
+            </div>
+
+            <div class="carousel-wrapper mx-auto">
+            <div class="carousel-track">
+                <!-- 1 -->
+                <div class="product-card card-animate" onclick="location.href='fish-protein.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1544943910-4c1dc44aab44?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Food Grade</div>
+                    <div class="product-number">01</div>
+                    <div class="product-content"><h3>Fish Protein Powder</h3><p>High nutritional protein powder</p></div>
+                </div>
+
+                <!-- 2 -->
+                <div class="product-card" onclick="location.href='fish-meal.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1535591273668-40aa08e78837?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Feed Grade</div>
+                    <div class="product-number">02</div>
+                    <div class="product-content"><h3>High Protein Fish Meal</h3><p>Premium feed supplement</p></div>
+                </div>
+
+                <!-- 3 -->
+                <div class="product-card" onclick="location.href='vitrified-tiles.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Premium</div>
+                    <div class="product-number">03</div>
+                    <div class="product-content"><h3>Vitrified Tiles</h3><p>Modern ceramic tiles</p></div>
+                </div>
+
+                <!-- 4 -->
+                <div class="product-card" onclick="location.href='roofing-tiles.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Durable</div>
+                    <div class="product-number">04</div>
+                    <div class="product-content"><h3>Roofing Tiles</h3><p>Weather resistant tiles</p></div>
+                </div>
+
+                <!-- 5 -->
+                <div class="product-card" onclick="location.href='sanitaryware.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Luxury</div>
+                    <div class="product-number">05</div>
+                    <div class="product-content"><h3>Sanitaryware</h3><p>Modern bathroom fixtures</p></div>
+                </div>
+
+                <!-- 6 -->
+                <div class="product-card" onclick="location.href='bathroom-accessories.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Modern</div>
+                    <div class="product-number">06</div>
+                    <div class="product-content"><h3>Bathroom Accessories</h3><p>Stylish fittings</p></div>
+                </div>
+
+                <!-- 7 -->
+                <div class="product-card" onclick="location.href='tiles-chemical.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Industrial</div>
+                    <div class="product-number">07</div>
+                    <div class="product-content"><h3>Tiles Chemical</h3><p>Industrial grade solutions</p></div>
+                </div>
+
+                <!-- 8 -->
+                <div class="product-card" onclick="location.href='frp-manhole.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Heavy Duty</div>
+                    <div class="product-number">08</div>
+                    <div class="product-content"><h3>FRP Manhole Cover</h3><p>Corrosion resistant</p></div>
+                </div>
+
+                <!-- 9 -->
+                <div class="product-card" onclick="location.href='crockery.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Elegant</div>
+                    <div class="product-number">09</div>
+                    <div class="product-content"><h3>Crockery</h3><p>Fine tableware</p></div>
+                </div>
+
+                <!-- 10 -->
+                <div class="product-card" onclick="location.href='louvers-panel.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Custom</div>
+                    <div class="product-number">10</div>
+                    <div class="product-content"><h3>Louvers Panel</h3><p>Architectural ventilation</p></div>
+                </div>
+
+                <!-- 11 -->
+                <div class="product-card" onclick="location.href='disposable-tableware.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1610873158319-b5e6c4aed57e?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Eco-Friendly</div>
+                    <div class="product-number">11</div>
+                    <div class="product-content"><h3>Disposable Tableware</h3><p>Food safe disposables</p></div>
+                </div>
+
+                <!-- 12 -->
+                <div class="product-card" onclick="location.href='pp-bags.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Industrial</div>
+                    <div class="product-number">12</div>
+                    <div class="product-content"><h3>Woven PP Bulk Bags</h3><p>Heavy capacity packaging</p></div>
+                </div>
+
+                <!-- 13 -->
+                <div class="product-card" onclick="location.href='pp-sheets.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Lightweight</div>
+                    <div class="product-number">13</div>
+                    <div class="product-content"><h3>PP Corrugated Sheets</h3><p>Waterproof sheets</p></div>
+                </div>
+
+                <!-- 14 -->
+                <div class="product-card" onclick="location.href='acp-panels.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Fire Resistant</div>
+                    <div class="product-number">14</div>
+                    <div class="product-content"><h3>ACP Panels</h3><p>Facade solutions</p></div>
+                </div>
+
+                <!-- 15 -->
+                <div class="product-card" onclick="location.href='pigments.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Chemical</div>
+                    <div class="product-number">15</div>
+                    <div class="product-content"><h3>Organic Pigments</h3><p>Coloring compounds</p></div>
+                </div>
+
+                <!-- 16 -->
+                <div class="product-card" onclick="location.href='indian-rice.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Premium</div>
+                    <div class="product-number">16</div>
+                    <div class="product-content"><h3>India's Rice</h3><p>Export quality rice</p></div>
+                </div>
+
+                <!-- 17 -->
+                <div class="product-card" onclick="location.href='indian-spices.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1596040033229-a0b3b1fc6fd3?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Authentic</div>
+                    <div class="product-number">17</div>
+                    <div class="product-content"><h3>India's Spices</h3><p>Authentic spices</p></div>
+                </div>
+
+                <!-- 18 -->
+                <div class="product-card" onclick="location.href='handicrafts.html'">
+                    <img class="product-image" src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=800&h=1000&fit=crop">
+                    <div class="product-overlay"></div>
+                    <div class="product-badge">Artisan</div>
+                    <div class="product-number">18</div>
+                    <div class="product-content"><h3>Handicraft Products</h3><p>Traditional crafts</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directors' Messages Section -->
+    <section class="py-20 bg-gray-50 overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-6">
+                <h2 class="text-2xl font-display font-bold text-gray-900">Directors' Messages</h2>
+            </div>
+            
+            <div class="directors-hero compact">
+                <!-- Slide 1 -->
+                <div class="quote-slide active">
+                    <div class="quote-text">"Creating lasting value through strategic partnerships that transcend borders."</div>
+                    <div class="author-section">
+                        <div class="director-name">Anant Patel</div>
+                        <div class="director-title">Director, Marvion Exim</div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="quote-slide">
+                    <div class="quote-text">"Building bridges between markets with integrity and foresight for mutual growth."</div>
+                    <div class="author-section">
+                        <div class="director-name">Faiz Sandhi</div>
+                        <div class="director-title">Director, Marvion Exim</div>
+                    </div>
+                </div>
+                
+                <!-- Progress indicator -->
+                <div class="progress-container active">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Directors' Messages Slideshow
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.querySelector('.directors-hero');
+            if (!heroSection) return;
+            
+            const slides = heroSection.querySelectorAll('.quote-slide');
+            const progressContainer = heroSection.querySelector('.progress-container');
+            const progressBar = heroSection.querySelector('.progress-bar');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Reset progress bar animation
+                if (progressContainer && progressBar) {
+                    progressContainer.classList.remove('active');
+                    void progressContainer.offsetWidth;
+                    progressBar.style.transition = 'none';
+                    progressBar.style.width = '0%';
+                }
+                
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Show the selected slide
+                if (slides[index]) {
+                    slides[index].classList.add('active');
+                    currentSlide = index;
+                }
+                
+                // Restart progress bar animation with 6-second duration
+                setTimeout(() => {
+                    if (progressContainer && progressBar) {
+                        progressBar.style.transition = 'width 6s linear';
+                        progressContainer.classList.add('active');
+                    }
+                }, 100);
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                if (!slides.length) return;
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+            
+            // Set up automatic slideshow with 6-second display time
+            function startSlideshow() {
+                clearInterval(slideInterval);
+                // 6 seconds display + 1.2 seconds transition = 7.2 seconds total
+                slideInterval = setInterval(nextSlide, 7200);
+                if (progressContainer) {
+                    progressContainer.classList.add('active');
+                }
+            }
+            
+            // Initialize
+            if (slides.length > 0) {
+                showSlide(0);
+                startSlideshow();
+                
+                // Pause on hover
+                heroSection.addEventListener('mouseenter', function() {
+                    clearInterval(slideInterval);
+                    if (progressContainer) {
+                        progressContainer.classList.remove('active');
+                    }
+                });
+                
+                heroSection.addEventListener('mouseleave', function() {
+                    startSlideshow();
+                });
+                
+                // Touch events for mobile
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                heroSection.addEventListener('touchstart', function(e) {
+                    touchStartX = e.changedTouches[0].screenX;
+                    clearInterval(slideInterval);
+                    if (progressContainer) {
+                        progressContainer.classList.remove('active');
+                    }
+                }, false);
+                
+                heroSection.addEventListener('touchend', function(e) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    startSlideshow();
+                }, false);
+                
+                function handleSwipe() {
+                    if (!slides.length) return;
+                    const swipeThreshold = 50;
+                    
+                    if (touchStartX - touchEndX > swipeThreshold) {
+                        // Swipe left - next slide
+                        nextSlide();
+                    } else if (touchEndX - touchStartX > swipeThreshold) {
+                        // Swipe right - previous slide
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                        showSlide(currentSlide);
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Enhanced Animation on Scroll
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Counter animation
+        function animateCounter(counter) {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const step = Math.ceil(target / (duration / 16)); // 60fps
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += step;
+                if (current >= target) {
+                    counter.textContent = target + '+';
+                } else {
+                    counter.textContent = current;
+                    requestAnimationFrame(updateCounter);
+                }
+            };
+            
+            updateCounter();
+        }
+        
+        // Initialize animations on page load and scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize counter animation when in view
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counters = document.querySelectorAll('.counter');
+                        counters.forEach(counter => {
+                            animateCounter(counter);
+                        });
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            // Observe the stats container
+            const statsContainer = document.querySelector('.stats-container');
+            if (statsContainer) {
+                counterObserver.observe(statsContainer);
+            }
+            // Function to check if element is in viewport
+            const isInViewport = (element) => {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight * 0.85) &&
+                    rect.bottom >= (window.innerHeight * 0.15)
+                );
+            };
+
+            // Function to handle scroll animations
+            const handleScrollAnimations = () => {
+                // Animate all sections with data-animate attribute
+                document.querySelectorAll('[data-animate]').forEach(section => {
+                    if (isInViewport(section)) {
+                        section.classList.add('animate-visible');
+                    }
+                });
+
+                // Animate product cards
+                const cards = document.querySelectorAll('.card-animate');
+                cards.forEach((card, index) => {
+                    if (isInViewport(card)) {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            };
+
+            // Add animation classes to all sections
+            document.querySelectorAll('section').forEach((section, index) => {
+                section.setAttribute('data-animate', '');
+                section.classList.add('opacity-0', 'transition-all', 'duration-700', 'ease-out');
+                
+                // Alternate between slide directions for visual interest
+                if (index % 2 === 0) {
+                    section.classList.add('translate-x-8');
+                } else {
+                    section.classList.add('-translate-x-8');
+                }
+                
+                // Add fade up for headings
+                const headings = section.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                headings.forEach((heading, i) => {
+                    heading.classList.add('opacity-0', 'transition-all', 'duration-700', 'ease-out', 'translate-y-6');
+                    heading.style.transitionDelay = `${i * 100 + 100}ms`;
+                });
+                
+                // Add fade in for paragraphs and lists
+                const content = section.querySelectorAll('p, li, .btn');
+                content.forEach((el, i) => {
+                    el.classList.add('opacity-0', 'transition-all', 'duration-700', 'ease-out', 'translate-y-4');
+                    el.style.transitionDelay = `${i * 100 + 200}ms`;
+                });
+            });
+
+            // Add visible class to elements in viewport
+            const animateElements = () => {
+                document.querySelectorAll('[data-animate]').forEach(section => {
+                    if (isInViewport(section)) {
+                        section.classList.add('animate-visible');
+                        section.classList.remove('opacity-0', 'translate-x-8', '-translate-x-8');
+                        
+                        // Animate child elements
+                        section.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, .btn').forEach(el => {
+                            if (isInViewport(el)) {
+                                el.classList.remove('opacity-0', 'translate-y-6', 'translate-y-4');
+                            }
+                        });
+                    }
+                });
+            };
+
+            // Initial check
+            animateElements();
+            
+            // Run on scroll and resize
+            window.addEventListener('scroll', animateElements);
+            window.addEventListener('resize', animateElements);
+
+            // Carousel functionality
+            const carousel = document.querySelector('.carousel-track');
+            const prevBtn = document.querySelector('.carousel-prev');
+            const nextBtn = document.querySelector('.carousel-next');
+            const slides = document.querySelectorAll('.product-card');
+            let currentIndex = 0;
+            const slideCount = slides.length;
+            let autoScroll;
+
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                updateCarousel();
+            }
+
+            function startCarousel() {
+                autoScroll = setInterval(nextSlide, 5000);
+            }
+
+            function stopCarousel() {
+                clearInterval(autoScroll);
+            }
+            
+            if (nextBtn && prevBtn) {
+                nextBtn.addEventListener('click', () => {
+                    nextSlide();
+                    stopCarousel();
+                    startCarousel();
+                });
+                
+                prevBtn.addEventListener('click', () => {
+                    prevSlide();
+                    stopCarousel();
+                    startCarousel();
+                });
+            }
+
+            // Pause on hover
+            if (carousel) {
+                carousel.addEventListener('mouseenter', stopCarousel);
+                carousel.addEventListener('mouseleave', startCarousel);
+            }
+
+            // Start auto-scrolling if carousel exists
+            if (carousel) {
+                startCarousel();
+            }
+            
+            // Re-initialize Lucide Icons after dynamic content loads
+            lucide.createIcons();
+        });
+    </script>
+    
+    <div class="footer-main-container fade-in" style="background-color: rgb(26, 26, 26);">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <div class="inline-flex items-center justify-center bg-white p-4 rounded-lg shadow-md mb-4">
+                        <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto">
+                    </div>
+                    <p class="text-gray-300 mb-6 font-serif italic text-lg font-light tracking-wider">Shipping the Future</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i data-lucide="linkedin" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Quick Links
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Home
+                        </a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            About Us
+                        </a></li>
+                        <li><a href="products.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Products
+                        </a></li>
+                        <li><a href="export.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Export
+                        </a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Contact
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Our Products
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#vitrified-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Vitrified Tiles
+                        </a></li>
+                        <li><a href="products.html#roofing-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Roofing Tiles
+                        </a></li>
+                        <li><a href="products.html#sanitaryware" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Sanitaryware
+                        </a></li>
+                        <li><a href="products.html#bathroom-accessories" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Bathroom Accessories
+                        </a></li>
+                        <li><a href="products.html#frp-manhole-cover" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            FRP Manhole Covers
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Contact Us
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="map-pin" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <span class="text-gray-300 group-hover:text-white transition-colors">8A National Highway, Mahendranagar, Morbi 2, Gujarat, India</span>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="phone" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <a href="tel:6351863517" class="text-gray-300 hover:text-white transition-colors">+91 63518 63517</a>
+                                <a href="tel:9104141300" class="text-gray-300 hover:text-white transition-colors">+91 91041 41300</a>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="mail" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <a href="mailto:info@marvionexim.com" class="text-gray-300 hover:text-white transition-colors">info@marvionexim.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0 text-center">© 2025 Marvion Exim. All rights reserved.</p>
+                    <div class="flex items-center space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    </footer>
+</body>
+</html>

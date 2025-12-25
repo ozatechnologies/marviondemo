@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Marvion Exim</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(33, 29%, 58%)',
+                        secondary: 'hsl(210, 40%, 96.1%)',
+                        background: 'hsl(0, 0%, 100%)',
+                        foreground: 'hsl(222, 47%, 11%)',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Cormorant Garamond', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .font-display { font-family: 'Cormorant Garamond', serif; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .fade-up {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        #header {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        #header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- HEADER -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100 py-4">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto object-contain">
+            </a>
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium text-primary uppercase tracking-wide transition-colors hover:text-primary">Home</a>
+                <a href="about.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">About</a>
+                <a href="products.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Products</a>
+                <a href="export.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Export</a>
+                <a href="catalogues.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Catalogues</a>
+                <a href="information.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Information</a>
+                <a href="contact.html" class="text-sm font-medium text-gray-600 uppercase tracking-wide transition-colors hover:text-primary">Get In Touch</a>
+            </nav>
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="contact.html" class="hidden xl:flex items-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                    Reach To Us <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" class="lucide lucide-map-pin h-4 w-4"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </a>
+            </div>
+            <!-- Change this line in your HEADER section -->
+            <button class="lg:hidden p-2" id="mobile-menu-button" onclick="document.getElementById('mobile-menu').classList.toggle('translate-x-full')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" class="lucide lucide-menu h-6 w-6"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="lg:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50" id="mobile-menu">
+            <div class="flex flex-col h-full p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-12 w-auto">
+                    <button onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="text-gray-500 hover:text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-6 w-6"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    </button>
+                </div>
+                <nav class="flex-1 flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Home</a>
+                    <a href="about.html" class="text-primary hover:text-primary transition-colors py-2 border-b border-gray-100">About</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Products</a>
+                    <a href="export.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Export</a>
+                    <a href="catalogues.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Catalogues</a>
+                    <a href="information.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Information</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Get In Touch</a>
+                </nav>
+                <div class="pt-4 mt-auto">
+                    <a href="contact.html" class="w-full flex items-center justify-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                        Reach To Us <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="pt-24"></div>
+
+    <main class="flex-grow" id="mainContent">
+        <!-- Categories View -->
+        <section id="categoriesView" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <span class="text-primary font-bold tracking-widest uppercase text-sm block mb-4">Our Collections</span>
+                    <h1 class="text-5xl font-display font-bold text-gray-900 mb-6 fade-up" style="animation-delay: 0.3s">Exquisite Product Range</h1>
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        Explore our comprehensive collection of premium tiles and sanitaryware, crafted for elegance and durability.
+                    </p>
+                </div>
+                <div id="categoriesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+            </div>
+        </section>
+
+        <!-- Products View -->
+        <section id="productsView" class="py-20 bg-white hidden">
+            <div class="container mx-auto px-4">
+                <button onclick="app.showCategories()" class="mb-8 flex items-center gap-2 text-primary hover:text-opacity-80">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    Back to Categories
+                </button>
+                <div class="max-w-3xl mx-auto text-center mb-16">
+                    <h1 id="categoryTitle" class="text-4xl font-display font-bold text-gray-900 mb-4"></h1>
+                    <p id="categorySubtitle" class="text-primary text-lg italic mb-3"></p>
+                    <p id="categoryDesc" class="text-gray-600"></p>
+                </div>
+                <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            </div>
+        </section>
+
+        <!-- Single Product View -->
+        <section id="productView" class="py-20 bg-white hidden">
+            <div class="container mx-auto px-4">
+                <button onclick="app.showProducts()" class="mb-8 flex items-center gap-2 text-primary hover:text-opacity-80">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    Back to Products
+                </button>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div>
+                        <div class="mb-4 relative overflow-hidden rounded-lg bg-gray-100">
+                            <img id="mainImage" src="" class="w-full h-[500px] object-cover">
+                            <div id="carouselIndicator" class="absolute bottom-4 left-0 right-0 flex justify-center gap-2"></div>
+                        </div>
+                        <div id="thumbnailsGrid" class="grid grid-cols-4 gap-2"></div>
+                    </div>
+                    <div>
+                        <h1 id="productName" class="text-4xl font-display font-bold mb-2"></h1>
+                        <p id="productSubtitle" class="text-primary text-lg italic mb-4"></p>
+                        <p id="productDesc" class="text-gray-600 text-lg mb-8 leading-relaxed"></p>
+                        <div class="mb-8">
+                            <h3 class="font-bold text-lg mb-3">Features</h3>
+                            <div id="tagsContainer" class="flex flex-wrap gap-2"></div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-8">
+                            <h3 class="font-bold text-lg mb-4">Product Information</h3>
+                            <div class="space-y-3 text-gray-600">
+                                <p><strong>Category:</strong> <span id="productCategory"></span></p>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="block w-full mt-8 bg-primary text-white py-3 rounded-lg font-bold hover:bg-opacity-90 transition-colors text-center">
+                            Request Information
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    
+    <div class="footer-main-container fade-in" style="background-color: rgb(26, 26, 26);">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <div class="inline-flex items-center justify-center bg-white p-4 rounded-lg shadow-md mb-4">
+                        <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto">
+                    </div>
+                    <p class="text-gray-300 mb-6 font-serif italic text-lg font-light tracking-wider">Shipping the Future</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i data-lucide="linkedin" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Quick Links
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Home
+                        </a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            About Us
+                        </a></li>
+                        <li><a href="products.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Products
+                        </a></li>
+                        <li><a href="export.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Export
+                        </a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Contact
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Our Products
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#vitrified-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Vitrified Tiles
+                        </a></li>
+                        <li><a href="products.html#roofing-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Roofing Tiles
+                        </a></li>
+                        <li><a href="products.html#sanitaryware" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Sanitaryware
+                        </a></li>
+                        <li><a href="products.html#bathroom-accessories" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Bathroom Accessories
+                        </a></li>
+                        <li><a href="products.html#frp-manhole-cover" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            FRP Manhole Covers
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Contact Us
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="map-pin" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <span class="text-gray-300 group-hover:text-white transition-colors">8A National Highway, Mahendranagar, Morbi 2, Gujarat, India</span>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="phone" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <a href="tel:6351863517" class="text-gray-300 hover:text-white transition-colors">+91 63518 63517</a>
+                                <a href="tel:9104141300" class="text-gray-300 hover:text-white transition-colors">+91 91041 41300</a>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="mail" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <a href="mailto:info@marvionexim.com" class="text-gray-300 hover:text-white transition-colors">info@marvionexim.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0 text-center">© 2025 Marvion Exim. All rights reserved.</p>
+                    <div class="flex items-center space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    </footer>
+
+    <script>
+        const API_URL = 'https://marvionexim.page.gd';
+
+        const app = {
+            categories: [],
+            products: [],
+            currentCategory: null,
+            currentProduct: null,
+            currentImageIndex: 0,
+            carouselInterval: null,
+
+            async init() {
+                console.log('Initializing...');
+                await this.loadCategories();
+                await this.loadProducts();
+                console.log('Categories loaded:', this.categories.length);
+                console.log('Products loaded:', this.products.length);
+                this.renderCategories();
+            },
+
+            async loadCategories() {
+                try {
+                    const res = await fetch(`${API_URL}/api/categories.php`);
+                    const data = await res.json();
+                    console.log('Categories response:', data);
+                    this.categories = Array.isArray(data) ? data : [];
+                } catch (e) {
+                    console.error('Error loading categories:', e);
+                    this.categories = [];
+                }
+            },
+
+            async loadProducts() {
+                try {
+                    const res = await fetch(`${API_URL}/api/products.php`);
+                    const data = await res.json();
+                    console.log('Products response:', data);
+                    this.products = Array.isArray(data) ? data : [];
+                } catch (e) {
+                    console.error('Error loading products:', e);
+                    this.products = [];
+                }
+            },
+
+            getValidImage(img, defaultImg = 'https://via.placeholder.com/400x300?text=No+Image') {
+                if (!img || img === 'NA' || img === '') return defaultImg;
+                return img;
+            },
+
+            renderCategories() {
+                console.log('Rendering categories...');
+                const grid = document.getElementById('categoriesGrid');
+                
+                if (this.categories.length === 0) {
+                    grid.innerHTML = '<p class="col-span-full text-center text-gray-500">No categories found</p>';
+                    return;
+                }
+
+                grid.innerHTML = this.categories.map((cat) => `
+                    <div class="group cursor-pointer" onclick="app.selectCategory(${cat.id})">
+                        <div class="relative overflow-hidden h-[400px] mb-6 rounded-lg">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+                            <img src="${this.getValidImage(cat.image)}" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Category'">
+                            <div class="absolute bottom-0 left-0 p-8 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                <div class="h-1 w-12 bg-primary mb-4"></div>
+                                <h3 class="text-2xl font-bold text-white font-display mb-2">${cat.name || 'Unnamed'}</h3>
+                                ${cat.subtitle ? `<p class="text-gray-200 text-sm">${cat.subtitle}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                lucide.createIcons();
+            },
+
+            selectCategory(catId) {
+                console.log('Selecting category:', catId);
+                this.currentCategory = this.categories.find(c => c.id == catId);
+                if (this.currentCategory) {
+                    this.renderProducts();
+                    this.showProducts();
+                }
+            },
+
+            renderProducts() {
+                console.log('Rendering products for category:', this.currentCategory.id);
+                const grid = document.getElementById('productsGrid');
+                const categoryProducts = this.products.filter(p => p.category_id == this.currentCategory.id);
+                
+                console.log('Found products:', categoryProducts.length);
+                
+                document.getElementById('categoryTitle').textContent = this.currentCategory.name || '';
+                document.getElementById('categorySubtitle').textContent = this.currentCategory.subtitle || '';
+                document.getElementById('categoryDesc').textContent = this.currentCategory.description || '';
+
+                if (categoryProducts.length === 0) {
+                    grid.innerHTML = '<p class="col-span-full text-center text-gray-500">No products in this category</p>';
+                    return;
+                }
+
+                grid.innerHTML = categoryProducts.map((prod) => {
+                    const images = Array.isArray(prod.images) ? prod.images : [prod.images];
+                    const firstImage = this.getValidImage(images[0]);
+                    const tags = prod.tags || '';
+                    
+                    return `
+                        <div class="group cursor-pointer" onclick="app.selectProduct(${prod.id})">
+                            <div class="relative overflow-hidden h-[300px] mb-4 rounded-lg">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10"></div>
+                                <img src="${firstImage}" 
+                                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                     onerror="this.src='https://via.placeholder.com/400x300?text=Product'">
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">${prod.name || 'Unnamed Product'}</h3>
+                            <p class="text-sm text-gray-600 mb-3 line-clamp-2">${prod.description || ''}</p>
+                            ${tags ? `<div class="flex flex-wrap gap-1">
+                                ${tags.split(',').filter(t => t.trim() && t.trim() !== 'NA').map(tag => 
+                                    `<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">${tag.trim()}</span>`
+                                ).join('')}
+                            </div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                lucide.createIcons();
+            },
+
+            selectProduct(prodId) {
+                console.log('Selecting product:', prodId);
+                this.currentProduct = this.products.find(p => p.id == prodId);
+                if (this.currentProduct) {
+                    this.currentImageIndex = 0;
+                    this.renderProduct();
+                    this.startCarousel();
+                    this.showProduct();
+                }
+            },
+
+            renderProduct() {
+                const prod = this.currentProduct;
+                const images = Array.isArray(prod.images) ? prod.images : [prod.images];
+                const validImages = images.map(img => this.getValidImage(img, 'https://via.placeholder.com/800x600?text=No+Image'));
+                
+                document.getElementById('mainImage').src = validImages[0];
+                document.getElementById('productName').textContent = prod.name || 'Unnamed Product';
+                document.getElementById('productSubtitle').textContent = prod.subtitle || '';
+                document.getElementById('productDesc').textContent = prod.description || '';
+                document.getElementById('productCategory').textContent = this.currentCategory.name || '';
+
+                const tags = prod.tags || '';
+                const tagsHTML = tags ? tags.split(',').filter(t => t.trim() && t.trim() !== 'NA').map(tag => 
+                    `<span class="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">${tag.trim()}</span>`
+                ).join('') : '<p class="text-gray-500">No tags</p>';
+                document.getElementById('tagsContainer').innerHTML = tagsHTML;
+
+                const thumbsHTML = validImages.map((img, idx) => `
+                    <img src="${img}" 
+                         onclick="app.goToImage(${idx})" 
+                         class="h-20 object-cover cursor-pointer rounded transition-all hover:opacity-100 ${idx === 0 ? 'ring-2 ring-primary' : 'opacity-60'}"
+                         onerror="this.src='https://via.placeholder.com/200x200?text=Error'">
+                `).join('');
+                document.getElementById('thumbnailsGrid').innerHTML = thumbsHTML;
+
+                const indicatorHTML = validImages.map((_, idx) => `
+                    <div class="indicator h-2 w-2 rounded-full ${idx === 0 ? 'bg-primary' : 'bg-gray-300'} transition-all"></div>
+                `).join('');
+                document.getElementById('carouselIndicator').innerHTML = indicatorHTML;
+
+                lucide.createIcons();
+            },
+
+            startCarousel() {
+                clearInterval(this.carouselInterval);
+                const images = Array.isArray(this.currentProduct.images) ? this.currentProduct.images : [this.currentProduct.images];
+                if (images.length > 1) {
+                    this.carouselInterval = setInterval(() => {
+                        this.currentImageIndex = (this.currentImageIndex + 1) % images.length;
+                        this.updateCarousel();
+                    }, 4000);
+                }
+            },
+
+            goToImage(idx) {
+                this.currentImageIndex = idx;
+                this.updateCarousel();
+                clearInterval(this.carouselInterval);
+                this.startCarousel();
+            },
+
+            updateCarousel() {
+                const images = Array.isArray(this.currentProduct.images) ? this.currentProduct.images : [this.currentProduct.images];
+                const validImages = images.map(img => this.getValidImage(img, 'https://via.placeholder.com/800x600?text=No+Image'));
+                
+                const mainImg = document.getElementById('mainImage');
+                mainImg.style.opacity = '0.5';
+                mainImg.src = validImages[this.currentImageIndex];
+                setTimeout(() => { mainImg.style.opacity = '1'; }, 250);
+
+                document.querySelectorAll('#thumbnailsGrid img').forEach((img, idx) => {
+                    img.classList.toggle('ring-2', idx === this.currentImageIndex);
+                    img.classList.toggle('ring-primary', idx === this.currentImageIndex);
+                    img.classList.toggle('opacity-60', idx !== this.currentImageIndex);
+                });
+
+                document.querySelectorAll('.indicator').forEach((ind, idx) => {
+                    ind.classList.toggle('bg-primary', idx === this.currentImageIndex);
+                    ind.classList.toggle('bg-gray-300', idx !== this.currentImageIndex);
+                });
+            },
+
+            showCategories() {
+                clearInterval(this.carouselInterval);
+                document.getElementById('categoriesView').classList.remove('hidden');
+                document.getElementById('productsView').classList.add('hidden');
+                document.getElementById('productView').classList.add('hidden');
+            },
+
+            showProducts() {
+                clearInterval(this.carouselInterval);
+                document.getElementById('categoriesView').classList.add('hidden');
+                document.getElementById('productsView').classList.remove('hidden');
+                document.getElementById('productView').classList.add('hidden');
+            },
+
+            showProduct() {
+                document.getElementById('categoriesView').classList.add('hidden');
+                document.getElementById('productsView').classList.add('hidden');
+                document.getElementById('productView').classList.remove('hidden');
+            }
+        };
+
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            app.init();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

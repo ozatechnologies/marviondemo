@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogues - Marvion Exim</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'hsl(33, 29%, 58%)',
+                        secondary: 'hsl(210, 40%, 96.1%)',
+                        background: 'hsl(0, 0%, 100%)',
+                        foreground: 'hsl(222, 47%, 11%)',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Cormorant Garamond', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .font-display { font-family: 'Cormorant Garamond', serif; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
+        
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from { 
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        .slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
+        .slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
+        .zoom-in { animation: zoomIn 0.8s ease-out forwards; }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        
+        /* Scroll Animation Classes */
+        [data-animate].animate-visible {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            transform: translateY(0) !important;
+        }
+        
+        [data-animate] h1,
+        [data-animate] h2,
+        [data-animate] h3,
+        [data-animate] h4,
+        [data-animate] h5,
+        [data-animate] h6,
+        [data-animate] p,
+        [data-animate] li,
+        [data-animate] .btn {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        [data-animate].animate-visible h1,
+        [data-animate].animate-visible h2,
+        [data-animate].animate-visible h3,
+        [data-animate].animate-visible h4,
+        [data-animate].animate-visible h5,
+        [data-animate].animate-visible h6,
+        [data-animate].animate-visible p,
+        [data-animate].animate-visible li,
+        [data-animate].animate-visible .btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Animation Delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+    <!-- HEADER -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100 py-4">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto object-contain">
+            </a>
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="index.html" class="text-sm font-medium text-gray-600 hover:text-primary uppercase tracking-wide transition-colors">Home</a>
+                <a href="about.html" class="text-sm font-medium text-gray-600 hover:text-primary uppercase tracking-wide transition-colors">About</a>
+                <a href="products.html" class="text-sm font-medium text-gray-600 hover:text-primary uppercase tracking-wide transition-colors">Products</a>
+                <a href="export.html" class="text-sm font-medium text-gray-600 hover:text-primary uppercase tracking-wide transition-colors">Export</a>
+                <a href="catalogues.html" class="text-sm font-medium text-primary hover:text-primary uppercase tracking-wide transition-colors">Catalogues</a>
+                <a href="information.html" class="text-sm font-medium text-gray-600 hover:text-primary uppercase tracking-wide transition-colors">Information</a>
+                <a href="contact.html" class="text-sm font-medium text-gray-600 hover:text-primary uppercase tracking-wide transition-colors">Get In Touch</a>
+            </nav>
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="contact.html" class="hidden xl:flex items-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                    Reach To Us 📍
+                </a>
+            </div>
+            <button class="lg:hidden p-2" onclick="document.getElementById('mobile-menu').classList.toggle('translate-x-full')">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+            </button>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div class="lg:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50" id="mobile-menu">
+            <div class="flex flex-col h-full p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-12 w-auto">
+                    <button onclick="document.getElementById('mobile-menu').classList.add('translate-x-full')" class="text-gray-500 hover:text-gray-700">✕</button>
+                </div>
+                <nav class="flex-1 flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">About</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Products</a>
+                    <a href="export.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Export</a>
+                    <a href="catalogues.html" class="text-primary hover:text-primary transition-colors py-2 border-b border-primary">Catalogues</a>
+                    <a href="information.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Information</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-primary transition-colors py-2 border-b border-gray-100">Get In Touch</a>
+                </nav>
+                <div class="pt-4 mt-auto">
+                    <a href="contact.html" class="w-full flex items-center justify-center gap-2 border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-white transition-colors text-sm uppercase tracking-wider">
+                        Reach To Us 📍
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Add padding to account for fixed header -->
+    <div class="pt-24"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+        <!-- Catalogues Section -->
+        <section class="py-12 md:py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center mb-12 fade-in">
+                    <span class="text-primary font-bold tracking-widest uppercase text-sm block mb-4">Our Collection</span>
+                    <h1 class="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">Product Catalogues</h1>
+                    <p class="text-gray-600 leading-relaxed">
+                        Explore our comprehensive range of high-quality products through our detailed catalogues.
+                    </p>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="mb-12 text-center">
+                    <div class="inline-flex flex-wrap justify-center gap-2 mb-6">
+                        <button onclick="filterProducts('all')" class="category-btn active px-4 py-2 rounded-full bg-primary text-white text-sm font-medium transition-all duration-300">
+                            All Products
+                        </button>
+                        <!-- Categories will be dynamically inserted here -->
+                        <div id="categoryFilters" class="flex flex-wrap justify-center gap-2">
+                            <!-- Categories will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catalogues Grid -->
+                <div id="cataloguesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Products will be dynamically inserted here -->
+                    <div class="col-span-full text-center py-12">
+                        <div class="animate-pulse">
+                            <i data-lucide="loader" class="h-12 w-12 text-primary mx-auto mb-4 animate-spin"></i>
+                            <p class="text-gray-500">Loading products...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Modal -->
+        <div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+            <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-6">
+                        <h3 class="text-2xl font-display font-bold text-gray-900" id="modalProductTitle"></h3>
+                        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                            <i data-lucide="x" class="h-6 w-6"></i>
+                        </button>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 rounded-lg overflow-hidden">
+                            <img id="modalProductImage" src="" alt="Product Image" class="w-full h-auto object-cover">
+                        </div>
+                        <div>
+                            <p class="text-lg text-gray-600 mb-4" id="modalProductDescription"></p>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-medium text-gray-900 mb-2">Specifications:</h4>
+                                    <ul class="space-y-2 text-gray-600" id="modalProductSpecs">
+                                        <!-- Specifications will be added here -->
+                                    </ul>
+                                </div>
+                                <div class="pt-4 border-t border-gray-100">
+                                    <a href="contact.html" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-opacity-90 transition-colors">
+                                        Request Quote
+                                        <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const API_URL = 'https://marvionexim.page.gd';
+        let categories = [];
+        let products = [];
+        let currentCategory = 'all';
+        let modal = null;
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Initialize modal
+            modal = document.getElementById('productModal');
+            
+            // Load data
+            Promise.all([
+                fetchCategories(),
+                fetchProducts()
+            ]).then(() => {
+                renderCategories();
+                renderProducts();
+                initAnimations();
+            }).catch(error => {
+                console.error('Error loading data:', error);
+                document.getElementById('cataloguesGrid').innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i data-lucide="alert-circle" class="h-12 w-12 text-red-500 mx-auto mb-4"></i>
+                        <p class="text-gray-600">Failed to load products. Please try again later.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+            });
+        });
+
+        // Fetch categories from API
+        async function fetchCategories() {
+            try {
+                const response = await fetch(`${API_URL}/api/categories.php`);
+                const data = await response.json();
+                if (data.success) {
+                    categories = data.data;
+                }
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        }
+
+        // Fetch products from API
+        async function fetchProducts() {
+            try {
+                const response = await fetch(`${API_URL}/api/products.php`);
+                const data = await response.json();
+                if (data.success) {
+                    products = data.data;
+                }
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        }
+
+        // Render category filters
+        function renderCategories() {
+            const container = document.getElementById('categoryFilters');
+            if (!container) return;
+
+            // Clear existing categories
+            container.innerHTML = '';
+
+            // Add each category as a filter button
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'category-btn px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-primary hover:text-primary text-sm font-medium transition-all duration-300';
+                button.textContent = category.name;
+                button.onclick = () => filterProducts(category.id);
+                container.appendChild(button);
+            });
+        }
+
+        // Filter products by category
+        function filterProducts(categoryId) {
+            currentCategory = categoryId;
+            
+            // Update active state of filter buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if ((categoryId === 'all' && btn.textContent.trim() === 'All Products') || 
+                    btn.textContent.trim() === categories.find(c => c.id === categoryId)?.name) {
+                    btn.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
+                    btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
+                } else {
+                    btn.classList.remove('active', 'bg-primary', 'text-white', 'border-primary');
+                    btn.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
+                }
+            });
+
+            renderProducts();
+        }
+
+        // Render products grid
+        function renderProducts() {
+            const container = document.getElementById('cataloguesGrid');
+            if (!container) return;
+
+            // Filter products by selected category
+            const filteredProducts = currentCategory === 'all' 
+                ? products 
+                : products.filter(product => product.category_id === currentCategory);
+
+            if (filteredProducts.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i data-lucide="package" class="h-12 w-12 text-gray-300 mx-auto mb-4"></i>
+                        <p class="text-gray-500">No products found in this category.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            // Generate product cards
+            container.innerHTML = filteredProducts.map(product => `
+                <div class="group bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100">
+                    <div class="relative overflow-hidden h-56 bg-gray-50 flex items-center justify-center">
+                        <img src="${product.images?.[0] || 'https://via.placeholder.com/400x300?text=No+Image'}" 
+                             alt="${product.name}" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+                            <button onclick="openProductModal('${product.id}')" 
+                                    class="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 
+                                           bg-white text-primary rounded-full p-3 shadow-lg hover:bg-primary hover:text-white">
+                                <i data-lucide="eye" class="h-5 w-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-lg font-display font-semibold text-gray-900 mb-1 line-clamp-1">${product.name}</h3>
+                                <p class="text-sm text-gray-500 mb-3">${categories.find(c => c.id === product.category_id)?.name || 'Uncategorized'}</p>
+                            </div>
+                            ${product.specifications?.size ? 
+                              `<span class="px-3 py-1 bg-primary bg-opacity-10 text-primary text-xs font-medium rounded-full">
+                                ${product.specifications.size}
+                              </span>` : ''
+                            }
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">${product.description || 'No description available.'}</p>
+                        <div class="flex items-center justify-between">
+                            <button onclick="openProductModal('${product.id}')" 
+                                    class="text-sm font-medium text-primary hover:text-opacity-80 transition-colors flex items-center">
+                                View Details
+                                <i data-lucide="arrow-right" class="ml-1 h-4 w-4"></i>
+                            </button>
+                            <a href="contact.html" class="text-sm font-medium text-white bg-primary hover:bg-opacity-90 px-4 py-2 rounded-md transition-colors">
+                                Enquire Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Reinitialize Lucide icons for the new elements
+            lucide.createIcons();
+        }
+
+        // Open product modal
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const modal = document.getElementById('productModal');
+            const category = categories.find(c => c.id === product.category_id);
+
+            // Update modal content
+            document.getElementById('modalProductTitle').textContent = product.name;
+            document.getElementById('modalProductDescription').textContent = product.description || 'No description available.';
+            
+            const productImage = document.getElementById('modalProductImage');
+            productImage.src = product.images?.[0] || 'https://via.placeholder.com/600x400?text=No+Image';
+            productImage.alt = product.name;
+
+            // Add specifications
+            const specsContainer = document.getElementById('modalProductSpecs');
+            specsContainer.innerHTML = '';
+            
+            if (product.specifications) {
+                Object.entries(product.specifications).forEach(([key, value]) => {
+                    if (value) {
+                        const li = document.createElement('li');
+                        li.className = 'flex';
+                        li.innerHTML = `
+                            <span class="font-medium text-gray-900 w-32 flex-shrink-0">${key.replace(/\b\w/g, l => l.toUpperCase())}:</span>
+                            <span class="text-gray-600">${value}</span>
+                        `;
+                        specsContainer.appendChild(li);
+                    }
+                });
+            }
+
+            // Show modal
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Initialize animations
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.catalogue-item').forEach(item => {
+                observer.observe(item);
+            });
+        }
+    </script>
+
+    <style>
+        .catalogue-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .catalogue-item.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Custom scrollbar for modal */
+        #productModal::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #productModal::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        #productModal::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        #productModal::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+
+    <!-- FOOTER -->
+    <footer class="footer-main-container fade-in" style="background-color: rgb(26, 26, 26);">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <div class="inline-flex items-center justify-center bg-white p-4 rounded-lg shadow-md mb-4">
+                        <img src="https://i.ibb.co/cKWxJgmH/m-removebg-preview.png" alt="Marvion Exim Logo" class="h-16 w-auto">
+                    </div>
+                    <p class="text-gray-300 mb-6 font-serif italic text-lg font-light tracking-wider">Shipping the Future</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i data-lucide="facebook" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i data-lucide="linkedin" class="h-5 w-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <i data-lucide="instagram" class="h-5 w-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Quick Links
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Home
+                        </a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            About Us
+                        </a></li>
+                        <li><a href="products.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Products
+                        </a></li>
+                        <li><a href="export.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Export
+                        </a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Contact
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Our Products
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#vitrified-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Vitrified Tiles
+                        </a></li>
+                        <li><a href="products.html#roofing-tiles" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Roofing Tiles
+                        </a></li>
+                        <li><a href="products.html#sanitaryware" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Sanitaryware
+                        </a></li>
+                        <li><a href="products.html#bathroom-accessories" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            Bathroom Accessories
+                        </a></li>
+                        <li><a href="products.html#frp-manhole-cover" class="text-gray-300 hover:text-white hover:pl-2 transition-all duration-300 flex items-center">
+                            <i data-lucide="chevron-right" class="h-4 w-4 mr-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            FRP Manhole Covers
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-display text-lg font-semibold mb-4 relative pb-2">
+                        Contact Us
+                        <span class="absolute bottom-0 left-0 w-12 h-0.5 bg-primary"></span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="map-pin" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <span class="text-gray-300 group-hover:text-white transition-colors">8A National Highway, Mahendranagar, Morbi 2, Gujarat, India</span>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="phone" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <a href="tel:6351863517" class="text-gray-300 hover:text-white transition-colors">+91 63518 63517</a>
+                                <a href="tel:9104141300" class="text-gray-300 hover:text-white transition-colors">+91 91041 41300</a>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3 group">
+                            <div class="bg-primary/10 p-2 rounded-full flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                <i data-lucide="mail" class="h-5 w-5 text-primary"></i>
+                            </div>
+                            <a href="mailto:info@marvionexim.com" class="text-gray-300 hover:text-white transition-colors">info@marvionexim.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0 text-center">© 2025 Marvion Exim. All rights reserved.</p>
+                    <div class="flex items-center space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm font-medium transition-colors">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('[aria-label="Toggle mobile menu"]');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('translate-x-full');
+                });
+            }
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#mobile-menu') && !event.target.closest('[aria-label="Toggle mobile menu"]')) {
+                    mobileMenu.classList.add('translate-x-full');
+                }
+            });
+
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('[data-animate]');
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('animate-visible');
+                    }
+                });
+            };
+
+            // Run once on page load
+            animateOnScroll();
+            
+            // Run on scroll
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
