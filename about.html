@@ -902,57 +902,199 @@
     </section>
 
     <!-- Directors' Messages Section -->
-    <section class="py-20 bg-gray-50 overflow-hidden">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-6">
-                <h2 class="text-2xl font-display font-bold text-gray-900">Directors' Messages</h2>
-            </div>
-            
-            <div class="directors-hero compact">
-                <!-- Slide 1 -->
-                <div class="quote-slide active">
-                    <div class="quote-text">"Creating lasting value through strategic partnerships that transcend borders."</div>
-                    <div class="author-section">
-                        <div class="director-name">Mr. Anant Patel</div>
-                        <div class="director-title">Director, Marvion Exim</div>
+    <!-- Directors' Messages Section -->
+<section class="py-20 bg-gray-50 overflow-hidden">
+    <div class="container mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl font-display font-bold text-gray-900">Director's Messages</h2>
+        </div>
+        
+        <div class="directors-container mx-auto max-w-5xl">
+            <div class="bg-white rounded-lg shadow-xl p-12 min-h-[450px] flex flex-col justify-center relative overflow-hidden">
+                <!-- Decorative elements -->
+                <div class="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-primary/20"></div>
+                <div class="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-primary/20"></div>
+                
+                <!-- Quote Slides Container -->
+                <div class="relative h-64 flex items-center justify-center mb-12">
+                    <!-- Slide 1 - Anant Patel -->
+                    <div class="quote-slide absolute inset-0 flex items-center justify-center text-center px-8" data-slide="0">
+                        <div class="quote-text text-2xl md:text-3xl text-gray-700 italic font-light leading-relaxed max-w-3xl">
+                            "Creating lasting value through strategic partnerships that transcend borders."
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 - Anant Patel -->
+                    <div class="quote-slide absolute inset-0 flex items-center justify-center text-center px-8" data-slide="1">
+                        <div class="quote-text text-2xl md:text-3xl text-gray-700 italic font-light leading-relaxed max-w-3xl">
+                            "Imports bring choice. Exports bring impact."
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 - Faiz Bambhaniya -->
+                    <div class="quote-slide absolute inset-0 flex items-center justify-center text-center px-8" data-slide="2">
+                        <div class="quote-text text-2xl md:text-3xl text-gray-700 italic font-light leading-relaxed max-w-3xl">
+                            "Building bridges between markets with integrity and foresight for mutual growth."
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4 - Faiz Bambhaniya -->
+                    <div class="quote-slide absolute inset-0 flex items-center justify-center text-center px-8" data-slide="3">
+                        <div class="quote-text text-2xl md:text-3xl text-gray-700 italic font-light leading-relaxed max-w-3xl">
+                            "Global business starts with trust and movement."
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Slide 2 -->
-                <div class="quote-slide">
-                    <div class="quote-text">"Building bridges between markets with integrity and foresight for mutual growth."</div>
-                    <div class="author-section">
-                        <div class="director-name">Mr. Faiz Bambhaniya</div>
-                        <div class="director-title">Director, Marvion Exim</div>
-                    </div>
-                </div>
-
-
-               <!-- Slide 2 -->
-                <div class="quote-slide">
-                    <div class="quote-text">"Global business starts with trust and movement."</div>
-                    <div class="author-section">
-                        <div class="director-name">Mr. Faiz Bambhaniya</div>
-                        <div class="director-title">Director, Marvion Exim</div>
-                    </div>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="quote-slide">
-                    <div class="quote-text">“Imports bring choice. Exports bring impact."</div>
-                    <div class="author-section">
-                        <div class="director-name">Mr. Anant Patel</div>
-                        <div class="director-title">Director, Marvion Exim</div>
+                <!-- Director Info - Changes based on slide -->
+                <div class="text-center relative z-10">
+                    <div class="director-info transition-opacity duration-500">
+                        <div class="text-2xl font-bold text-gray-800 director-name mb-1">Mr. Anant Patel</div>
+                        <div class="text-gray-500 director-title">Director, Marvion Exim</div>
                     </div>
                 </div>
                 
                 <!-- Progress indicator -->
-                <div class="progress-container active">
+                <div class="progress-container mt-8">
                     <div class="progress-bar"></div>
                 </div>
             </div>
         </div>
-    </section>
+        
+        <style>
+            .directors-container {
+                position: relative;
+            }
+            
+            .quote-slide {
+                transition: opacity 1s ease-in-out;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .quote-slide.active {
+                opacity: 1;
+            }
+            
+            .director-info {
+                transition: opacity 0.5s ease-in-out;
+            }
+            
+            .director-info.fade-out {
+                opacity: 0;
+            }
+            
+            .progress-container {
+                width: 120px;
+                height: 3px;
+                background-color: #e5e7eb;
+                border-radius: 2px;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+            
+            .progress-bar {
+                height: 100%;
+                background: linear-gradient(90deg, var(--primary), #d4a574);
+                width: 0%;
+                transition: width 5s linear;
+            }
+            
+            @media (max-width: 768px) {
+                .quote-text {
+                    font-size: 1.5rem !important;
+                }
+            }
+        </style>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.quote-slide');
+            const progressBar = document.querySelector('.progress-bar');
+            const directorInfo = document.querySelector('.director-info');
+            const directorName = document.querySelector('.director-name');
+            const directorTitle = document.querySelector('.director-title');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // Director information for each slide
+            const directors = [
+                { name: "Mr. Anant Patel", title: "Director, Marvion Exim" },
+                { name: "Mr. Anant Patel", title: "Director, Marvion Exim" },
+                { name: "Mr. Faiz Bambhaniya", title: "Director, Marvion Exim" },
+                { name: "Mr. Faiz Bambhaniya", title: "Director, Marvion Exim" }
+            ];
+            
+            function updateDirectorInfo(index) {
+                // Check if we need to change director (slides 0-1 vs 2-3)
+                const currentDirector = index < 2 ? 0 : 2;
+                const previousSlideDirector = currentSlide < 2 ? 0 : 2;
+                
+                if (currentDirector !== previousSlideDirector) {
+                    // Fade out current info
+                    directorInfo.classList.add('fade-out');
+                    
+                    // Change info after fade out
+                    setTimeout(() => {
+                        directorName.textContent = directors[index].name;
+                        directorTitle.textContent = directors[index].title;
+                        directorInfo.classList.remove('fade-out');
+                    }, 500);
+                }
+            }
+            
+            function showSlide(index) {
+                // Update director info if needed
+                updateDirectorInfo(index);
+                
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                
+                // Show current slide
+                slides[index].classList.add('active');
+                
+                // Reset and start progress bar
+                progressBar.style.width = '0%';
+                progressBar.style.transition = 'none';
+                void progressBar.offsetWidth; // Trigger reflow
+                progressBar.style.transition = 'width 5s linear';
+                progressBar.style.width = '100%';
+                
+                currentSlide = index;
+            }
+            
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }
+            
+            // Initialize first slide
+            showSlide(0);
+            
+            // Auto-advance slides every 5 seconds
+            slideInterval = setInterval(nextSlide, 5000);
+            
+            // Pause on hover
+            const container = document.querySelector('.directors-container');
+            container.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+                progressBar.style.animationPlayState = 'paused';
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(nextSlide, 5000);
+                progressBar.style.animationPlayState = 'running';
+            });
+        });
+        </script>
+    </div>
+</section>
 
     <script>
         // Directors' Messages Slideshow
